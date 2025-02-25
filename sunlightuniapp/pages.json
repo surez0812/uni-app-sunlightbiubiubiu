@@ -1,51 +1,23 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/register/register",
-			"style": {
-				"navigationBarTitleText": "注册"
-			}
-		},
-		{
-			"path": "pages/birthday/birthday",
-			"style": {
-				"navigationBarTitleText": "录入生日"
-			}
-		},
+	"pages": [
 		{
 			"path": "pages/welcome/welcome",
 			"style": {
 				"navigationBarTitleText": "今日建议"
 			}
+		},
+		{
+			"path": "pages/birthday/birthday",
+			"style": {
+				"navigationBarTitleText": "录入生日",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "八字分析",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
-	},
-	"tabBar": {
-		"list": [
-			{
-				"pagePath": "pages/index/index",
-				"text": "首页",
-				"iconPath": "static/tabbar/home.png",
-				"selectedIconPath": "static/tabbar/home-active.png"
-			},
-			{
-				"pagePath": "pages/welcome/welcome",
-				"text": "我的",
-				"iconPath": "static/tabbar/user.png",
-				"selectedIconPath": "static/tabbar/user-active.png"
-			}
-		]
-	},
-	"uniIdRouter": {}
+	}
 }

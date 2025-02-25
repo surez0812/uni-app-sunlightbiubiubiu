@@ -1,5 +1,9 @@
 <template>
   <view class="page-container">
+    <view class="custom-nav">
+      <text class="nav-title">录入生日</text>
+    </view>
+    
     <view class="birthday-form">
       <text class="title">设置您的生日</text>
       <text class="subtitle">请选择您的出生日期和时间</text>
@@ -27,7 +31,7 @@
       </view>
       
       <button class="button-primary save-button" @click="saveBirthday">
-        保存信息
+        开始分析
       </button>
     </view>
   </view>
@@ -49,22 +53,30 @@ export default {
       this.birthTime = e.detail.value;
     },
     async saveBirthday() {
-      const userId = uni.getStorageSync('userId');
+      if (!this.birthday || !this.birthTime) {
+        uni.showToast({
+          title: '请选择完整的出生日期和时间',
+          icon: 'none'
+        });
+        return;
+      }
+
       try {
-        const res = await uniCloud.callFunction({
-          name: 'saveBirthday',
-          data: {
-            user_id: userId,
-            birthday: this.birthday,
-            birthTime: this.birthTime
-          }
+        const db = uniCloud.database();
+        await db.collection('user_birthdays').add({
+          birthday: this.birthday,
+          birthTime: this.birthTime
         });
 
-        if (res.result.success) {
-          uni.navigateTo({ url: '/pages/welcome/welcome' });
-        }
+        uni.redirectTo({ 
+          url: '/pages/welcome/welcome'
+        });
       } catch (error) {
         console.error('保存失败:', error);
+        uni.showToast({
+          title: '保存失败，请重试',
+          icon: 'none'
+        });
       }
     }
   }
@@ -72,54 +84,76 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/styles/theme.scss';
+.page-container {
+  min-height: 100vh;
+  background-color: #F8F9FA;
+  padding-bottom: 40px;
+}
+
+.custom-nav {
+  background-color: #F8F8F8;
+  padding: 44px 16px 12px;
+  
+  .nav-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    display: block;
+  }
+}
 
 .birthday-form {
-  @include card;
-  margin: $spacing-xl;
+  margin: 20px;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   
   .title {
-    font-size: $font-xl;
-    font-weight: $weight-bold;
-    color: $text-primary;
-    margin-bottom: $spacing-sm;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
   }
   
   .subtitle {
-    font-size: $font-md;
-    color: $text-secondary;
-    margin-bottom: $spacing-xl;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 32px;
   }
   
   .form-group {
-    margin-bottom: $spacing-xl;
+    margin-bottom: 32px;
   }
   
   .picker {
-    margin-bottom: $spacing-lg;
+    margin-bottom: 20px;
     
     .picker-item {
       .label {
-        font-size: $font-sm;
-        color: $text-secondary;
-        margin-bottom: $spacing-xs;
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 8px;
         display: block;
       }
       
       .input-display {
-        @include flex-between;
-        padding: $spacing-md;
-        background-color: $bg-secondary;
-        border-radius: $radius-md;
-        border: 1px solid $border-color;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background-color: #F8F9FA;
+        border-radius: 8px;
+        border: 1px solid #E9ECEF;
         
         .placeholder {
-          color: $text-muted;
+          color: #ADB5BD;
         }
         
         .icon {
-          font-size: $font-sm;
-          color: $text-secondary;
+          font-size: 12px;
+          color: #666;
         }
       }
     }
@@ -127,8 +161,18 @@ export default {
   
   .save-button {
     width: 100%;
-    height: 44px;
-    font-size: $font-md;
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #4A90E2;
+    border-radius: 8px;
+    border: none;
+    
+    &:active {
+      opacity: 0.9;
+    }
   }
 }
 </style>

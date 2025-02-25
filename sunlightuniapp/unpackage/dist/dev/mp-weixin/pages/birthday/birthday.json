@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "录入生日",
+  "navigationStyle": "custom",
   "usingComponents": {}
 }

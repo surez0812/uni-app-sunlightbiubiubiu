@@ -1,36 +1,37 @@
 {
   "bsonType": "object",
   "description": "用户生日信息表，存储用户的生日和出生时间信息",
-  "required": ["user_id", "birthday", "birthTime"],
+  "required": ["birthday", "birthTime"],
   "properties": {
     "_id": {
-      "description": "记录ID，系统自动生成",
+      "description": "ID，系统自动生成",
       "bsonType": "string"
     },
-    "user_id": {
-      "description": "关联用户ID，对应uni-id-users._id",
-      "bsonType": "string",
-      "foreignKey": "uni-id-users._id",
-      "permission": {
-        "read": "auth.uid == doc.user_id || 'READ_USER_BIRTHDAYS' in auth.permission",
-        "write": "auth.uid == doc.user_id || 'WRITE_USER_BIRTHDAYS' in auth.permission"
-      }
-    },
     "birthday": {
-      "description": "用户生日，格式为YYYY-MM-DD",
+      "description": "出生日期，格式：YYYY-MM-DD",
       "bsonType": "string",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
       "errorMessage": {
         "pattern": "生日格式不正确，应为YYYY-MM-DD"
-      }
+      },
+      "title": "出生日期"
     },
     "birthTime": {
-      "description": "用户出生时间，格式为HH:mm",
+      "description": "出生时间，格式：HH:mm",
       "bsonType": "string",
       "pattern": "^\\d{2}:\\d{2}$",
       "errorMessage": {
         "pattern": "出生时间格式不正确，应为HH:mm"
-      }
+      },
+      "title": "出生时间"
+    },
+    "create_time": {
+      "description": "创建时间",
+      "bsonType": "timestamp",
+      "forceDefaultValue": {
+        "$env": "now"
+      },
+      "title": "创建时间"
     },
     "createdAt": {
       "description": "记录创建时间",
@@ -48,10 +49,10 @@
     }
   },
   "permission": {
-    "read": "doc.user_id == auth.uid",
-    "create": "auth.uid != null",
-    "update": "doc.user_id == auth.uid",
-    "delete": "doc.user_id == auth.uid"
+    "read": true,
+    "create": true,
+    "update": true,
+    "delete": true
   },
   "fieldRules": [
     {
@@ -61,4 +62,4 @@
     }
   ],
   "version": "1.0.0"
-} 
+}

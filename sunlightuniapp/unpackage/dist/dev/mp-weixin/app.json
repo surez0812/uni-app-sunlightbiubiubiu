@@ -1,32 +1,14 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/register/register",
-    "pages/birthday/birthday",
-    "pages/welcome/welcome"
+    "pages/welcome/welcome",
+    "pages/birthday/birthday"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
+    "navigationBarTitleText": "八字分析",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/home-active.png"
-      },
-      {
-        "pagePath": "pages/welcome/welcome",
-        "text": "我的",
-        "iconPath": "static/tabbar/user.png",
-        "selectedIconPath": "static/tabbar/user-active.png"
-      }
-    ]
   },
   "usingComponents": {}
 }

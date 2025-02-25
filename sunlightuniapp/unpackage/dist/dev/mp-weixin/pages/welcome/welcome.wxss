@@ -24,144 +24,140 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-/* 主题颜色 */
-/* 背景颜色 */
-/* 文字颜色 */
-/* 边框颜色 */
-/* 阴影 */
-/* 圆角 */
-/* 间距 */
-/* 字体大小 */
-/* 字体粗细 */
-/* 动画 */
-/* 混合器 */
-/* 通用按钮样式 */
-.button-primary {
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #4A90E2;
-  color: #FFFFFF;
-}
-.button-primary:active {
-  opacity: 0.9;
-}
-.button-secondary {
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #F8F9FA;
-  color: #6C757D;
-}
-.button-secondary:active {
-  background-color: #E9ECEF;
-}
-/* 输入框样式 */
-.input-base {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #DEE2E6;
-  border-radius: 8px;
-  font-size: 16px;
-  color: #212529;
-  background-color: #FFFFFF;
-}
-.input-base:focus {
-  border-color: #4A90E2;
-  outline: none;
-}
-/* 卡片样式 */
-.card {
-  background-color: #FFFFFF;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  margin-bottom: 16px;
-}
-/* 标题样式 */
-.title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #212529;
-  margin-bottom: 16px;
-}
-.subtitle {
-  font-size: 18px;
-  font-weight: 500;
-  color: #6C757D;
-  margin-bottom: 8px;
-}
-/* 列表样式 */
-.list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid #E9ECEF;
-}
-.list-item:last-child {
-  border-bottom: none;
-}
-/* 页面容器 */
 .page-container {
-  padding: 24px;
-  background-color: #F8F9FA;
+  padding: 20rpx;
+  background-color: #f8f8f8;
   min-height: 100vh;
 }
 .welcome-header {
-  margin-bottom: 32px;
+  margin-bottom: 30rpx;
 }
 .welcome-header .title {
-  font-size: 24px;
-  margin-bottom: 16px;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
 }
 .welcome-header .user-info {
-  background-color: #FFFFFF;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-top: 20rpx;
 }
-.welcome-header .user-info .subtitle {
+.welcome-header .user-info .subtitle, .welcome-header .user-info .date {
+  font-size: 28rpx;
+  color: #666;
   display: block;
-  margin-bottom: 8px;
+  margin-top: 10rpx;
 }
-.welcome-header .user-info .date {
-  color: #6C757D;
+.bazi-info {
+  margin-bottom: 30rpx;
 }
-.advice-container .luck-card {
-  margin-bottom: 24px;
-  background-color: #4A90E2;
+.bazi-info .section {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
 }
-.advice-container .luck-card .card-title {
-  color: #FFFFFF;
-  font-size: 18px;
-  margin-bottom: 8px;
+.bazi-info .section .title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+.bazi-info .section .pillars {
+  display: flex;
+  justify-content: space-around;
+}
+.bazi-info .section .pillars .pillar {
+  text-align: center;
+}
+.bazi-info .section .pillars .pillar text {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+  display: block;
+}
+.hourly-fortune {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+}
+.hourly-fortune .section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+.hourly-fortune .fortune-chart {
+  width: 100%;
+  height: 400rpx;
+}
+.hourly-fortune .fortune-chart .chart-container {
+  display: flex;
+  padding: 20rpx 0;
+  min-width: 1200rpx;
+}
+.hourly-fortune .fortune-chart .fortune-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300rpx;
+  padding: 0 10rpx;
+}
+.hourly-fortune .fortune-chart .fortune-bar .bar {
+  width: 40rpx;
+  background: #e0e0e0;
+  margin-bottom: 10rpx;
+  border-radius: 20rpx;
+  transition: all 0.3s;
+}
+.hourly-fortune .fortune-chart .fortune-bar .bar.score-high {
+  background: #ff4d4f;
+}
+.hourly-fortune .fortune-chart .fortune-bar .bar.score-medium {
+  background: #ffa940;
+}
+.hourly-fortune .fortune-chart .fortune-bar .bar.score-low {
+  background: #bae637;
+}
+.hourly-fortune .fortune-chart .fortune-bar .time-label {
+  font-size: 24rpx;
+  color: #666;
+}
+.hourly-fortune .fortune-chart .fortune-bar .score-label {
+  font-size: 24rpx;
+  color: #999;
+}
+.hourly-fortune .fortune-chart .fortune-bar .advice-label {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 4rpx;
+}
+.advice-container .card {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.advice-container .card .card-title {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+  display: block;
 }
 .advice-container .luck-card .luck-text {
-  color: #FFFFFF;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
 }
 .advice-container .advice-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-.advice-container .advice-grid .advice-card .card-title {
-  color: #6C757D;
-  font-size: 14px;
-  margin-bottom: 4px;
+  gap: 20rpx;
 }
 .advice-container .advice-grid .advice-card .advice-text {
-  color: #212529;
-  font-size: 16px;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.5;
 }
 
