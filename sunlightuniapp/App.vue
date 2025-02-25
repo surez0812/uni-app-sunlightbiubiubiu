@@ -15,8 +15,8 @@
 			});
 			try {
 				// 检查是否有生日数据
-				const res = await db.collection('user_birthdays')
-					.orderBy('create_time', 'desc')
+				const res = await db.collection('user_info')
+					.orderBy('create_date', 'desc')
 					.limit(1)
 					.get();
 				

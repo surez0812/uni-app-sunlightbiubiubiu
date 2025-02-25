@@ -221,6 +221,10 @@ exports.main = async (event, context) => {
     const currentHour = today.getHours();
     const todayHourGanzhi = getHourGanzhi(todayDayGanzhi.stem, currentHour);
     
+    // 获取用户生日信息
+    const db = uniCloud.database()
+    const userInfo = await db.collection('user_info').limit(1).get()
+    
     // 计算12时辰运势
     const hourlyFortune = [];
     for (let hour = 0; hour < 24; hour++) {

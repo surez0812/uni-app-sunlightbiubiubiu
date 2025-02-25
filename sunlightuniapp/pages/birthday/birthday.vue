@@ -1,38 +1,31 @@
 <template>
-  <view class="page-container">
-    <view class="custom-nav">
-      <text class="nav-title">录入生日</text>
+  <view class="birthday-container">
+    <view class="header">
+      <image class="logo" src="/static/logo.png" mode="aspectFit"></image>
+      <text class="title">欢迎使用每日生活助手</text>
+      <text class="subtitle">请输入您的生日信息，我们将为您提供个性化的生活建议</text>
     </view>
-    
-    <view class="birthday-form">
-      <text class="title">设置您的生日</text>
-      <text class="subtitle">请选择您的出生日期和时间</text>
-      
+
+    <view class="form-container">
       <view class="form-group">
-        <picker mode="date" @change="setBirthday" class="picker">
-          <view class="picker-item">
-            <text class="label">出生日期</text>
-            <view class="input-display">
-              <text :class="{'placeholder': !birthday}">{{birthday || '请选择日期'}}</text>
-              <text class="icon">▼</text>
-            </view>
-          </view>
-        </picker>
-        
-        <picker mode="time" @change="setBirthTime" class="picker">
-          <view class="picker-item">
-            <text class="label">出生时间</text>
-            <view class="input-display">
-              <text :class="{'placeholder': !birthTime}">{{birthTime || '请选择时间'}}</text>
-              <text class="icon">▼</text>
-            </view>
-          </view>
+        <text class="label">出生日期</text>
+        <picker mode="date" :value="birthday" @change="onBirthdayChange" class="picker">
+          <view class="picker-value">{{ birthday || '请选择日期' }}</view>
         </picker>
       </view>
-      
-      <button class="button-primary save-button" @click="saveBirthday">
-        开始分析
+
+      <view class="form-group">
+        <text class="label">出生时间</text>
+        <picker mode="time" :value="birthTime" @change="onBirthTimeChange" class="picker">
+          <view class="picker-value">{{ birthTime || '请选择时间' }}</view>
+        </picker>
+      </view>
+
+      <button class="submit-btn" @tap="saveBirthday" :disabled="!birthday || !birthTime">
+        开始使用
       </button>
+
+      <text class="tips">* 您的信息仅用于提供个性化的生活建议</text>
     </view>
   </view>
 </template>
@@ -46,37 +39,59 @@ export default {
     }
   },
   methods: {
-    setBirthday(e) {
-      this.birthday = e.detail.value;
+    onBirthdayChange(e) {
+      this.birthday = e.detail.value
     },
-    setBirthTime(e) {
-      this.birthTime = e.detail.value;
+    onBirthTimeChange(e) {
+      this.birthTime = e.detail.value
     },
     async saveBirthday() {
       if (!this.birthday || !this.birthTime) {
         uni.showToast({
-          title: '请选择完整的出生日期和时间',
+          title: '请填写完整信息',
           icon: 'none'
-        });
-        return;
+        })
+        return
       }
 
       try {
-        const db = uniCloud.database();
-        await db.collection('user_birthdays').add({
+        const db = uniCloud.database()
+        await db.collection('user_info').add({
           birthday: this.birthday,
-          birthTime: this.birthTime
-        });
+          birthTime: this.birthTime,
+          create_date: Date.now()
+        })
 
-        uni.redirectTo({ 
-          url: '/pages/welcome/welcome'
-        });
+        uni.showToast({
+          title: '信息已保存',
+          icon: 'success',
+          duration: 1500
+        })
+
+        setTimeout(() => {
+          const pages = getCurrentPages()
+          if (pages.length > 1) {
+            uni.navigateBack({
+              delta: 1
+            })
+          } else {
+            uni.navigateTo({
+              url: '/pages/welcome/welcome',
+              fail: (err) => {
+                console.error('页面跳转失败:', err)
+                uni.switchTab({
+                  url: '/pages/welcome/welcome'
+                })
+              }
+            })
+          }
+        }, 1500)
       } catch (error) {
-        console.error('保存失败:', error);
+        console.error('保存失败:', error)
         uni.showToast({
           title: '保存失败，请重试',
           icon: 'none'
-        });
+        })
       }
     }
   }
@@ -84,94 +99,94 @@ export default {
 </script>
 
 <style lang="scss">
-.page-container {
+.birthday-container {
   min-height: 100vh;
-  background-color: #F8F9FA;
-  padding-bottom: 40px;
-}
-
-.custom-nav {
-  background-color: #F8F8F8;
-  padding: 44px 16px 12px;
+  background-color: #f8f9fa;
+  padding: 40rpx;
   
-  .nav-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    text-align: center;
-    display: block;
-  }
-}
-
-.birthday-form {
-  margin: 20px;
-  background: #fff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  
-  .title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 8px;
-  }
-  
-  .subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 32px;
-  }
-  
-  .form-group {
-    margin-bottom: 32px;
-  }
-  
-  .picker {
-    margin-bottom: 20px;
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60rpx;
     
-    .picker-item {
-      .label {
-        font-size: 14px;
-        color: #666;
-        margin-bottom: 8px;
-        display: block;
-      }
-      
-      .input-display {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 16px;
-        background-color: #F8F9FA;
-        border-radius: 8px;
-        border: 1px solid #E9ECEF;
-        
-        .placeholder {
-          color: #ADB5BD;
-        }
-        
-        .icon {
-          font-size: 12px;
-          color: #666;
-        }
-      }
+    .logo {
+      width: 160rpx;
+      height: 160rpx;
+      margin-bottom: 30rpx;
+    }
+    
+    .title {
+      font-size: 36rpx;
+      color: #333;
+      margin-bottom: 20rpx;
+      font-weight: 500;
+    }
+    
+    .subtitle {
+      font-size: 28rpx;
+      color: #666;
+      text-align: center;
+      line-height: 1.5;
     }
   }
   
-  .save-button {
-    width: 100%;
-    height: 48px;
-    line-height: 48px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    background-color: #4A90E2;
-    border-radius: 8px;
-    border: none;
+  .form-container {
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 40rpx;
+    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
     
-    &:active {
-      opacity: 0.9;
+    .form-group {
+      margin-bottom: 40rpx;
+      
+      .label {
+        font-size: 28rpx;
+        color: #333;
+        margin-bottom: 20rpx;
+        display: block;
+      }
+      
+      .picker {
+        background: #f8f9fa;
+        height: 88rpx;
+        border-radius: 8rpx;
+        display: flex;
+        align-items: center;
+        padding: 0 20rpx;
+        
+        .picker-value {
+          font-size: 28rpx;
+          color: #333;
+        }
+      }
+    }
+    
+    .submit-btn {
+      width: 100%;
+      height: 88rpx;
+      background: #007AFF;
+      color: #fff;
+      border-radius: 44rpx;
+      font-size: 32rpx;
+      margin-top: 60rpx;
+      margin-bottom: 30rpx;
+      
+      &:active {
+        opacity: 0.9;
+      }
+      
+      &[disabled] {
+        background: #ccc;
+        opacity: 0.6;
+      }
+    }
+    
+    .tips {
+      font-size: 24rpx;
+      color: #999;
+      text-align: center;
+      display: block;
     }
   }
 }

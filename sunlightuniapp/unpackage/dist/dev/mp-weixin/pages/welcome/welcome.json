@@ -1,4 +1,5 @@
 {
-  "navigationBarTitleText": "今日建议",
+  "navigationBarTitleText": "生活助手",
+  "enablePullDownRefresh": true,
   "usingComponents": {}
 }

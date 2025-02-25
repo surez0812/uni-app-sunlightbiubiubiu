@@ -319,7 +319,7 @@ var _default = {
                 _context2.prev = 0;
                 db = uniCloud.database();
                 _context2.next = 4;
-                return db.collection('user_birthdays').orderBy('create_time', 'desc').limit(1).get();
+                return db.collection('user_info').orderBy('create_date', 'desc').limit(1).get();
               case 4:
                 res = _context2.sent;
                 console.log('数据库查询结果:', res);

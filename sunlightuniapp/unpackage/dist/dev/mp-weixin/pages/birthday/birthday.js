@@ -177,13 +177,6 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   data: function data() {
     return {
@@ -192,10 +185,10 @@ var _default = {
     };
   },
   methods: {
-    setBirthday: function setBirthday(e) {
+    onBirthdayChange: function onBirthdayChange(e) {
       this.birthday = e.detail.value;
     },
-    setBirthTime: function setBirthTime(e) {
+    onBirthTimeChange: function onBirthTimeChange(e) {
       this.birthTime = e.detail.value;
     },
     saveBirthday: function saveBirthday() {
@@ -211,7 +204,7 @@ var _default = {
                   break;
                 }
                 uni.showToast({
-                  title: '请选择完整的出生日期和时间',
+                  title: '请填写完整信息',
                   icon: 'none'
                 });
                 return _context.abrupt("return");
@@ -219,30 +212,51 @@ var _default = {
                 _context.prev = 3;
                 db = uniCloud.database();
                 _context.next = 7;
-                return db.collection('user_birthdays').add({
+                return db.collection('user_info').add({
                   birthday: _this.birthday,
-                  birthTime: _this.birthTime
+                  birthTime: _this.birthTime,
+                  create_date: Date.now()
                 });
               case 7:
-                uni.redirectTo({
-                  url: '/pages/welcome/welcome'
+                uni.showToast({
+                  title: '信息已保存',
+                  icon: 'success',
+                  duration: 1500
                 });
-                _context.next = 14;
+                setTimeout(function () {
+                  var pages = getCurrentPages();
+                  if (pages.length > 1) {
+                    uni.navigateBack({
+                      delta: 1
+                    });
+                  } else {
+                    uni.navigateTo({
+                      url: '/pages/welcome/welcome',
+                      fail: function fail(err) {
+                        console.error('页面跳转失败:', err);
+                        uni.switchTab({
+                          url: '/pages/welcome/welcome'
+                        });
+                      }
+                    });
+                  }
+                }, 1500);
+                _context.next = 15;
                 break;
-              case 10:
-                _context.prev = 10;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](3);
                 console.error('保存失败:', _context.t0);
                 uni.showToast({
                   title: '保存失败，请重试',
                   icon: 'none'
                 });
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 10]]);
+        }, _callee, null, [[3, 11]]);
       }))();
     }
   }

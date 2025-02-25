@@ -82,10 +82,9 @@
 			async checkBirthday() {
 				try {
 					const db = uniCloud.database();
-					const { result } = await db.collection('user_birthdays')
-						.where({
-							user_id: this.uniID.uid
-						})
+					const { result } = await db.collection('user_info')
+						.orderBy('create_date', 'desc')
+						.limit(1)
 						.get();
 					
 					if (!result.data.length) {

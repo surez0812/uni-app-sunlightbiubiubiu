@@ -3,20 +3,46 @@
 		{
 			"path": "pages/welcome/welcome",
 			"style": {
-				"navigationBarTitleText": "今日建议"
+				"navigationBarTitleText": "生活助手",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/birthday/birthday",
 			"style": {
-				"navigationBarTitleText": "录入生日",
+				"navigationBarTitleText": "个人信息",
 				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "我的"
 			}
 		}
 	],
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#007AFF",
+		"backgroundColor": "#FFFFFF",
+		"list": [
+			{
+				"pagePath": "pages/welcome/welcome",
+				"text": "每日建议",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home-active.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/tabbar/user.png",
+				"selectedIconPath": "static/tabbar/user-active.png"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "八字分析",
+		"navigationBarTitleText": "生活助手",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}

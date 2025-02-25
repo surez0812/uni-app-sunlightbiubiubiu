@@ -24,80 +24,82 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.page-container {
+.birthday-container {
   min-height: 100vh;
-  background-color: #F8F9FA;
-  padding-bottom: 40px;
+  background-color: #f8f9fa;
+  padding: 40rpx;
 }
-.custom-nav {
-  background-color: #F8F8F8;
-  padding: 44px 16px 12px;
+.birthday-container .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60rpx;
 }
-.custom-nav .nav-title {
-  font-size: 16px;
-  font-weight: 600;
+.birthday-container .header .logo {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 30rpx;
+}
+.birthday-container .header .title {
+  font-size: 36rpx;
   color: #333;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+}
+.birthday-container .header .subtitle {
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+.birthday-container .form-container {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.birthday-container .form-container .form-group {
+  margin-bottom: 40rpx;
+}
+.birthday-container .form-container .form-group .label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+.birthday-container .form-container .form-group .picker {
+  background: #f8f9fa;
+  height: 88rpx;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+}
+.birthday-container .form-container .form-group .picker .picker-value {
+  font-size: 28rpx;
+  color: #333;
+}
+.birthday-container .form-container .submit-btn {
+  width: 100%;
+  height: 88rpx;
+  background: #007AFF;
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  margin-top: 60rpx;
+  margin-bottom: 30rpx;
+}
+.birthday-container .form-container .submit-btn:active {
+  opacity: 0.9;
+}
+.birthday-container .form-container .submit-btn[disabled] {
+  background: #ccc;
+  opacity: 0.6;
+}
+.birthday-container .form-container .tips {
+  font-size: 24rpx;
+  color: #999;
   text-align: center;
   display: block;
-}
-.birthday-form {
-  margin: 20px;
-  background: #fff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-.birthday-form .title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
-}
-.birthday-form .subtitle {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 32px;
-}
-.birthday-form .form-group {
-  margin-bottom: 32px;
-}
-.birthday-form .picker {
-  margin-bottom: 20px;
-}
-.birthday-form .picker .picker-item .label {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 8px;
-  display: block;
-}
-.birthday-form .picker .picker-item .input-display {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  background-color: #F8F9FA;
-  border-radius: 8px;
-  border: 1px solid #E9ECEF;
-}
-.birthday-form .picker .picker-item .input-display .placeholder {
-  color: #ADB5BD;
-}
-.birthday-form .picker .picker-item .input-display .icon {
-  font-size: 12px;
-  color: #666;
-}
-.birthday-form .save-button {
-  width: 100%;
-  height: 48px;
-  line-height: 48px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  background-color: #4A90E2;
-  border-radius: 8px;
-  border: none;
-}
-.birthday-form .save-button:active {
-  opacity: 0.9;
 }
 

@@ -125,7 +125,7 @@ var _default = {
               });
               _context.prev = 3;
               _context.next = 6;
-              return db.collection('user_birthdays').orderBy('create_time', 'desc').limit(1).get();
+              return db.collection('user_info').orderBy('create_date', 'desc').limit(1).get();
             case 6:
               res = _context.sent;
               console.log('查询结果:', res);

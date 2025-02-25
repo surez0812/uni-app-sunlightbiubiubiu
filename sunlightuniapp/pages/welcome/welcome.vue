@@ -143,8 +143,8 @@ export default {
     async getUserInfo() {
       try {
         const db = uniCloud.database();
-        const res = await db.collection('user_birthdays')
-          .orderBy('create_time', 'desc')
+        const res = await db.collection('user_info')
+          .orderBy('create_date', 'desc')
           .limit(1)
           .get();
         
