@@ -1,0 +1,64 @@
+{
+  "bsonType": "object",
+  "description": "用户生日信息表，存储用户的生日和出生时间信息",
+  "required": ["user_id", "birthday", "birthTime"],
+  "properties": {
+    "_id": {
+      "description": "记录ID，系统自动生成",
+      "bsonType": "string"
+    },
+    "user_id": {
+      "description": "关联用户ID，对应uni-id-users._id",
+      "bsonType": "string",
+      "foreignKey": "uni-id-users._id",
+      "permission": {
+        "read": "auth.uid == doc.user_id || 'READ_USER_BIRTHDAYS' in auth.permission",
+        "write": "auth.uid == doc.user_id || 'WRITE_USER_BIRTHDAYS' in auth.permission"
+      }
+    },
+    "birthday": {
+      "description": "用户生日，格式为YYYY-MM-DD",
+      "bsonType": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "errorMessage": {
+        "pattern": "生日格式不正确，应为YYYY-MM-DD"
+      }
+    },
+    "birthTime": {
+      "description": "用户出生时间，格式为HH:mm",
+      "bsonType": "string",
+      "pattern": "^\\d{2}:\\d{2}$",
+      "errorMessage": {
+        "pattern": "出生时间格式不正确，应为HH:mm"
+      }
+    },
+    "createdAt": {
+      "description": "记录创建时间",
+      "bsonType": "timestamp",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "updatedAt": {
+      "description": "记录最后更新时间",
+      "bsonType": "timestamp",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  },
+  "permission": {
+    "read": "doc.user_id == auth.uid",
+    "create": "auth.uid != null",
+    "update": "doc.user_id == auth.uid",
+    "delete": "doc.user_id == auth.uid"
+  },
+  "fieldRules": [
+    {
+      "field": "birthday",
+      "rule": "date <= now",
+      "errorMessage": "生日日期不能晚于当前日期"
+    }
+  ],
+  "version": "1.0.0"
+} 

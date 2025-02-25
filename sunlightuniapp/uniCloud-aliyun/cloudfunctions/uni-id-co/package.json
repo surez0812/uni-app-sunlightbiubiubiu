@@ -1,0 +1,9 @@
+{
+  "name": "uni-id-co",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.obj.js",
+  "dependencies": {
+    "uni-id-common": "^1.0.9"
+  }
+} 
