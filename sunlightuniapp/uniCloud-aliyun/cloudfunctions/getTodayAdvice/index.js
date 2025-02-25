@@ -23,6 +23,38 @@ const HOUR_TO_BRANCH = {
   21: '亥', 22: '亥'  // 21:00-22:59
 };
 
+// 天干地支转换为节气季节信息
+const SEASON_MAP = {
+  '春': ['寅', '卯', '辰'],
+  '夏': ['巳', '午', '未'],
+  '秋': ['申', '酉', '戌'],
+  '冬': ['亥', '子', '丑']
+};
+
+// 根据季节推荐颜色
+const SEASON_COLORS = {
+  '春': ['嫩绿色', '粉色', '淡黄色'],
+  '夏': ['白色', '浅蓝色', '淡紫色'],
+  '秋': ['橙色', '棕色', '米色'],
+  '冬': ['深蓝色', '灰色', '黑色']
+};
+
+// 时段建议
+const TIME_ADVICE = {
+  '子': { activity: '睡眠', advice: '充分休息' },
+  '丑': { activity: '早起', advice: '规划一天' },
+  '寅': { activity: '晨练', advice: '锻炼身体' },
+  '卯': { activity: '学习', advice: '专注效率高' },
+  '辰': { activity: '工作', advice: '处理要务' },
+  '巳': { activity: '会议', advice: '沟通顺畅' },
+  '午': { activity: '用餐', advice: '注意营养' },
+  '未': { activity: '思考', advice: '规划未来' },
+  '申': { activity: '运动', advice: '放松身心' },
+  '酉': { activity: '总结', advice: '回顾提升' },
+  '戌': { activity: '休闲', advice: '享受生活' },
+  '亥': { activity: '阅读', advice: '充实自己' }
+};
+
 // 计算年干支
 function getYearGanzhi(year) {
   const offset = (year - 4) % 60;
@@ -78,14 +110,51 @@ function getHourGanzhi(dayStem, hour) {
   };
 }
 
-// 计算时辰运势分数
+// 根据地支获取季节
+function getSeason(branch) {
+  for (const [season, branches] of Object.entries(SEASON_MAP)) {
+    if (branches.includes(branch)) {
+      return season;
+    }
+  }
+  return '春'; // 默认返回春季
+}
+
+// 获取时段建议
+function getTimeAdvice(branch) {
+  return TIME_ADVICE[branch] || { activity: '休息', advice: '调整状态' };
+}
+
+// 生成每日建议
+function generateDailyAdvice(birthGanzhi, todayGanzhi) {
+  const season = getSeason(todayGanzhi.month.branch);
+  const colors = SEASON_COLORS[season];
+  const colorIndex = Math.floor(Math.random() * colors.length);
+  const timeAdvice = getTimeAdvice(todayGanzhi.hour.branch);
+  
+  const moodLevels = ['愉悦', '平和', '舒适', '安静'];
+  const moodIndex = Math.floor(Math.random() * moodLevels.length);
+  
+  return {
+    mood: moodLevels[moodIndex],
+    color: colors[colorIndex],
+    career: `建议${timeAdvice.activity}，${timeAdvice.advice}`,
+    social: '保持开放和友善的态度，与他人友好交流',
+    health: '规律作息，适量运动，注意饮食均衡',
+    finance: '理性消费，合理规划支出',
+    diet: '根据季节选择应季食材，注意营养均衡'
+  };
+}
+
+// 计算时段分数
 function calculateHourScore(birthGanzhi, hourGanzhi) {
-  // 这里实现一个简单的算法，实际项目中可以根据专业的八字算法来计算
-  const score = Math.floor(Math.random() * 60) + 40; // 40-100之间的随机分数
+  const timeAdvice = getTimeAdvice(hourGanzhi.branch);
+  const score = Math.floor(Math.random() * 30) + 70; // 70-100之间的随机分数
+  
   return {
     time: hourGanzhi.branch,
     score: score,
-    advice: score >= 80 ? '大吉' : score >= 60 ? '吉' : '平'
+    advice: timeAdvice.activity
   };
 }
 
@@ -174,10 +243,22 @@ exports.main = async (event, context) => {
       { year: todayYearGanzhi, month: todayMonthGanzhi, day: todayDayGanzhi }
     );
 
+    // 生成建议
+    const advice = generateDailyAdvice(
+      { year: birthYearGanzhi, month: birthMonthGanzhi, day: birthDayGanzhi, hour: birthHourGanzhi },
+      { year: todayYearGanzhi, month: todayMonthGanzhi, day: todayDayGanzhi, hour: todayHourGanzhi }
+    );
+
     return {
       code: 0,
       date: new Date().toLocaleDateString(),
-      ...fortune,
+      luck: advice.mood,
+      color: advice.color,
+      career: advice.career,
+      love: advice.social,
+      health: advice.health,
+      investment: advice.finance,
+      food: advice.diet,
       bazi: {
         birth: {
           year: `${birthYearGanzhi.stem}${birthYearGanzhi.branch}`,
@@ -196,19 +277,19 @@ exports.main = async (event, context) => {
     };
     
   } catch (error) {
-    console.error('获取运势失败:', error);
+    console.error('获取建议失败:', error);
     
     return {
       code: -1,
       msg: error.message,
       date: new Date().toLocaleDateString(),
-      luck: '平平',
-      color: '白色',
-      career: '事业运平稳',
-      love: '感情运平稳',
-      health: '保持良好的作息习惯',
-      investment: '投资需谨慎',
-      food: '清淡饮食为主'
+      luck: '平和',
+      color: '素雅色系',
+      career: '按时作息，规律工作',
+      love: '保持平和心态',
+      health: '规律作息，适量运动',
+      investment: '理性消费',
+      food: '清淡饮食'
     };
   }
 };
