@@ -1,15 +1,51 @@
 <template>
-  <view>
-    <view>欢迎回来！</view>
-    <view>您的生日：{{userInfo.birthday}} {{userInfo.birthTime}}</view>
-    <view>今日日期：{{todayAdvice.date}}</view>
-    <view>今日吉凶：{{todayAdvice.luck}}</view>
-    <view>穿着建议：{{todayAdvice.color}}</view>
-    <view>事业建议：{{todayAdvice.career}}</view>
-    <view>感情建议：{{todayAdvice.love}}</view>
-    <view>健康建议：{{todayAdvice.health}}</view>
-    <view>投资建议：{{todayAdvice.investment}}</view>
-    <view>食物建议：{{todayAdvice.food}}</view>
+  <view class="page-container">
+    <view class="welcome-header">
+      <text class="title">欢迎回来！</text>
+      <view class="user-info">
+        <text class="subtitle">您的生日：{{userInfo.birthday}} {{userInfo.birthTime}}</text>
+        <text class="date">今日日期：{{todayAdvice.date}}</text>
+      </view>
+    </view>
+    
+    <view class="advice-container">
+      <view class="card luck-card">
+        <text class="card-title">今日吉凶</text>
+        <text class="luck-text">{{todayAdvice.luck}}</text>
+      </view>
+      
+      <view class="advice-grid">
+        <view class="card advice-card">
+          <text class="card-title">穿着建议</text>
+          <text class="advice-text">{{todayAdvice.color}}</text>
+        </view>
+        
+        <view class="card advice-card">
+          <text class="card-title">事业建议</text>
+          <text class="advice-text">{{todayAdvice.career}}</text>
+        </view>
+        
+        <view class="card advice-card">
+          <text class="card-title">感情建议</text>
+          <text class="advice-text">{{todayAdvice.love}}</text>
+        </view>
+        
+        <view class="card advice-card">
+          <text class="card-title">健康建议</text>
+          <text class="advice-text">{{todayAdvice.health}}</text>
+        </view>
+        
+        <view class="card advice-card">
+          <text class="card-title">投资建议</text>
+          <text class="advice-text">{{todayAdvice.investment}}</text>
+        </view>
+        
+        <view class="card advice-card">
+          <text class="card-title">食物建议</text>
+          <text class="advice-text">{{todayAdvice.food}}</text>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -50,4 +86,68 @@ export default {
     }
   }
 }
-</script> 
+</script>
+
+<style lang="scss">
+@import '@/styles/theme.scss';
+
+.welcome-header {
+  margin-bottom: $spacing-xl;
+  
+  .title {
+    font-size: $font-2xl;
+    margin-bottom: $spacing-md;
+  }
+  
+  .user-info {
+    @include card;
+    
+    .subtitle {
+      display: block;
+      margin-bottom: $spacing-sm;
+    }
+    
+    .date {
+      color: $text-secondary;
+    }
+  }
+}
+
+.advice-container {
+  .luck-card {
+    margin-bottom: $spacing-lg;
+    background-color: $theme-primary;
+    
+    .card-title {
+      color: $text-light;
+      font-size: $font-lg;
+      margin-bottom: $spacing-sm;
+    }
+    
+    .luck-text {
+      color: $text-light;
+      font-size: $font-xl;
+      font-weight: $weight-bold;
+    }
+  }
+  
+  .advice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    
+    .advice-card {
+      .card-title {
+        color: $text-secondary;
+        font-size: $font-sm;
+        margin-bottom: $spacing-xs;
+      }
+      
+      .advice-text {
+        color: $text-primary;
+        font-size: $font-md;
+      }
+    }
+  }
+}
+</style>

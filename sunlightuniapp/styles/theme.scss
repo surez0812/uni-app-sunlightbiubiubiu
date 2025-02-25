@@ -1,0 +1,159 @@
+/* 主题颜色 */
+$theme-primary: #4A90E2;
+$theme-secondary: #F5A623;
+$theme-accent: #D0021B;
+
+/* 背景颜色 */
+$bg-primary: #FFFFFF;
+$bg-secondary: #F8F9FA;
+$bg-tertiary: #E9ECEF;
+
+/* 文字颜色 */
+$text-primary: #212529;
+$text-secondary: #6C757D;
+$text-muted: #ADB5BD;
+$text-light: #FFFFFF;
+
+/* 边框颜色 */
+$border-color: #DEE2E6;
+$border-light: #E9ECEF;
+
+/* 阴影 */
+$shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+$shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+$shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+
+/* 圆角 */
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 16px;
+$radius-full: 9999px;
+
+/* 间距 */
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+/* 字体大小 */
+$font-xs: 12px;
+$font-sm: 14px;
+$font-md: 16px;
+$font-lg: 18px;
+$font-xl: 20px;
+$font-2xl: 24px;
+
+/* 字体粗细 */
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-bold: 600;
+
+/* 动画 */
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.4s ease;
+
+/* 混合器 */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin card {
+  background-color: $bg-primary;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  box-shadow: $shadow-sm;
+}
+
+/* 通用按钮样式 */
+@mixin button-base {
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+  font-weight: $weight-medium;
+  transition: all $transition-fast;
+  @include flex-center;
+}
+
+.button-primary {
+  @include button-base;
+  background-color: $theme-primary;
+  color: $text-light;
+  
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.button-secondary {
+  @include button-base;
+  background-color: $bg-secondary;
+  color: $text-secondary;
+  
+  &:active {
+    background-color: $bg-tertiary;
+  }
+}
+
+/* 输入框样式 */
+.input-base {
+  width: 100%;
+  padding: $spacing-sm;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  font-size: $font-md;
+  color: $text-primary;
+  background-color: $bg-primary;
+  
+  &:focus {
+    border-color: $theme-primary;
+    outline: none;
+  }
+}
+
+/* 卡片样式 */
+.card {
+  @include card;
+  margin-bottom: $spacing-md;
+}
+
+/* 标题样式 */
+.title {
+  font-size: $font-xl;
+  font-weight: $weight-bold;
+  color: $text-primary;
+  margin-bottom: $spacing-md;
+}
+
+.subtitle {
+  font-size: $font-lg;
+  font-weight: $weight-medium;
+  color: $text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+/* 列表样式 */
+.list-item {
+  @include flex-between;
+  padding: $spacing-md;
+  border-bottom: 1px solid $border-light;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+/* 页面容器 */
+.page-container {
+  padding: $spacing-lg;
+  background-color: $bg-secondary;
+  min-height: 100vh;
+}

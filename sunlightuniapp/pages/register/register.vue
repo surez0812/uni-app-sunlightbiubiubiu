@@ -1,6 +1,18 @@
 <template>
-  <view>
-    <button @click="getPhoneNumber">微信授权注册</button>
+  <view class="page-container register-page">
+    <view class="register-content">
+      <image class="logo" src="/static/logo.png" mode="aspectFit"></image>
+      <text class="title">欢迎使用八字分析</text>
+      <text class="subtitle">使用微信账号快速注册</text>
+      
+      <view class="auth-section">
+        <button class="button-primary auth-button" @click="getPhoneNumber">
+          <text class="wechat-icon">微信</text>
+          <text>授权注册</text>
+        </button>
+        <text class="privacy-tip">注册即代表同意《用户协议》和《隐私政策》</text>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -42,4 +54,62 @@ export default {
     }
   }
 }
-</script> 
+</script>
+
+<style lang="scss">
+@import '@/styles/theme.scss';
+
+.register-page {
+  @include flex-center;
+  background-color: $bg-primary;
+  min-height: 100vh;
+}
+
+.register-content {
+  width: 80%;
+  max-width: 300px;
+  @include flex-center;
+  flex-direction: column;
+  
+  .logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: $spacing-xl;
+  }
+  
+  .title {
+    font-size: $font-2xl;
+    font-weight: $weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+  }
+  
+  .subtitle {
+    font-size: $font-md;
+    color: $text-secondary;
+    margin-bottom: $spacing-xl * 2;
+  }
+}
+
+.auth-section {
+  width: 100%;
+  
+  .auth-button {
+    @include flex-center;
+    width: 100%;
+    height: 48px;
+    margin-bottom: $spacing-md;
+    
+    .wechat-icon {
+      margin-right: $spacing-sm;
+    }
+  }
+  
+  .privacy-tip {
+    display: block;
+    text-align: center;
+    font-size: $font-xs;
+    color: $text-muted;
+  }
+}
+</style>
