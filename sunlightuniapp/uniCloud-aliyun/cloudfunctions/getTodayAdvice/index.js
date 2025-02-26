@@ -55,15 +55,64 @@ const TIME_ADVICE = {
   '亥': { activity: '阅读', advice: '充实自己' }
 };
 
+// 天干五行对应关系
+const tianganWuxing = {
+  '甲': '木',
+  '乙': '木',
+  '丙': '火',
+  '丁': '火',
+  '戊': '土',
+  '己': '土',
+  '庚': '金',
+  '辛': '金',
+  '壬': '水',
+  '癸': '水'
+};
+
+// 地支五行对应关系
+const dizhiWuxing = {
+  '子': '水',
+  '丑': '土',
+  '寅': '木',
+  '卯': '木',
+  '辰': '土',
+  '巳': '火',
+  '午': '火',
+  '未': '土',
+  '申': '金',
+  '酉': '金',
+  '戌': '土',
+  '亥': '水'
+};
+
+// 为干支字符添加五行属性
+function addWuxingToGanzhi(ganzhi) {
+  if (!ganzhi || ganzhi.length < 2) return { text: ganzhi || '--', wuxing: [] };
+  
+  const gan = ganzhi.charAt(0);
+  const zhi = ganzhi.charAt(1);
+  
+  console.log('处理干支:', ganzhi, '天干:', gan, '地支:', zhi);
+  console.log('天干五行:', tianganWuxing[gan], '地支五行:', dizhiWuxing[zhi]);
+  
+  // 确保五行属性存在
+  const ganWuxing = tianganWuxing[gan];
+  const zhiWuxing = dizhiWuxing[zhi];
+  
+  console.log('最终五行结果:', [ganWuxing, zhiWuxing]);
+  
+  return {
+    text: ganzhi,
+    wuxing: [ganWuxing, zhiWuxing]
+  };
+}
+
 // 计算年干支
 function getYearGanzhi(year) {
   const offset = (year - 4) % 60;
   const stemIndex = offset % 10;
   const branchIndex = offset % 12;
-  return {
-    stem: HEAVENLY_STEMS[stemIndex],
-    branch: EARTHLY_BRANCHES[branchIndex]
-  };
+  return addWuxingToGanzhi(`${HEAVENLY_STEMS[stemIndex]}${EARTHLY_BRANCHES[branchIndex]}`);
 }
 
 // 计算月干支
@@ -81,20 +130,14 @@ function getMonthGanzhi(yearStem, lunarMonth) {
   const stemIndex = (stemOffset + lunarMonth - 1) % 10;
   const branchIndex = (lunarMonth + 1) % 12;
   
-  return {
-    stem: HEAVENLY_STEMS[stemIndex],
-    branch: EARTHLY_BRANCHES[branchIndex]
-  };
+  return addWuxingToGanzhi(`${HEAVENLY_STEMS[stemIndex]}${EARTHLY_BRANCHES[branchIndex]}`);
 }
 
 // 计算日干支
 function getDayGanzhi(date) {
   const solar = Solar.fromDate(date);
   const lunar = solar.getLunar();
-  return {
-    stem: lunar.getDayInGanZhi().substring(0, 1),
-    branch: lunar.getDayInGanZhi().substring(1)
-  };
+  return addWuxingToGanzhi(lunar.getDayInGanZhi());
 }
 
 // 计算时干支
@@ -104,10 +147,7 @@ function getHourGanzhi(dayStem, hour) {
   const stemOffset = (HEAVENLY_STEMS.indexOf(dayStem) * 2) % 10;
   const stemIndex = (stemOffset + Math.floor((hour + 1) / 2)) % 10;
   
-  return {
-    stem: HEAVENLY_STEMS[stemIndex],
-    branch: branch
-  };
+  return addWuxingToGanzhi(`${HEAVENLY_STEMS[stemIndex]}${branch}`);
 }
 
 // 根据地支获取季节
@@ -127,10 +167,10 @@ function getTimeAdvice(branch) {
 
 // 生成每日建议
 function generateDailyAdvice(birthGanzhi, todayGanzhi) {
-  const season = getSeason(todayGanzhi.month.branch);
+  const season = getSeason(todayGanzhi.month.wuxing[1]);
   const colors = SEASON_COLORS[season];
   const colorIndex = Math.floor(Math.random() * colors.length);
-  const timeAdvice = getTimeAdvice(todayGanzhi.hour.branch);
+  const timeAdvice = getTimeAdvice(todayGanzhi.hour.wuxing[1]);
   
   const moodLevels = ['愉悦', '平和', '舒适', '安静'];
   const moodIndex = Math.floor(Math.random() * moodLevels.length);
@@ -148,11 +188,11 @@ function generateDailyAdvice(birthGanzhi, todayGanzhi) {
 
 // 计算时段分数
 function calculateHourScore(birthGanzhi, hourGanzhi) {
-  const timeAdvice = getTimeAdvice(hourGanzhi.branch);
+  const timeAdvice = getTimeAdvice(hourGanzhi.wuxing[1]);
   const score = Math.floor(Math.random() * 30) + 70; // 70-100之间的随机分数
   
   return {
-    time: hourGanzhi.branch,
+    time: hourGanzhi.text,
     score: score,
     advice: timeAdvice.activity
   };
@@ -187,18 +227,19 @@ function analyzeFortune(birthGanzhi, todayGanzhi) {
 
 exports.main = async (event, context) => {
   try {
-    const { birthday, birthTime } = event;
-    
-    if (!birthday || !birthTime) {
-      return {
-        code: -1,
-        msg: '生日或时间参数缺失'
-      };
+    // 检查输入参数
+    if (!event.birthday || !event.birthTime) {
+      throw new Error('缺少必要的生日信息');
     }
 
+    console.log('收到请求参数:', {
+      birthday: event.birthday,
+      birthTime: event.birthTime
+    });
+
     // 解析生日和时间
-    const [birthYear, birthMonth, birthDay] = birthday.split('-').map(Number);
-    const birthHour = parseInt(birthTime.split(':')[0]);
+    const [birthYear, birthMonth, birthDay] = event.birthday.split('-').map(Number);
+    const birthHour = parseInt(event.birthTime.split(':')[0]);
     const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
     
     // 获取出生时的八字
@@ -206,9 +247,9 @@ exports.main = async (event, context) => {
     const birthLunar = birthSolar.getLunar();
     
     const birthYearGanzhi = getYearGanzhi(birthYear);
-    const birthMonthGanzhi = getMonthGanzhi(birthYearGanzhi.stem, birthLunar.getMonth());
+    const birthMonthGanzhi = getMonthGanzhi(birthYearGanzhi.text.charAt(0), birthLunar.getMonth());
     const birthDayGanzhi = getDayGanzhi(birthDate);
-    const birthHourGanzhi = getHourGanzhi(birthDayGanzhi.stem, birthHour);
+    const birthHourGanzhi = getHourGanzhi(birthDayGanzhi.text.charAt(0), birthHour);
     
     // 获取今日八字
     const today = new Date();
@@ -216,10 +257,21 @@ exports.main = async (event, context) => {
     const todayLunar = todaySolar.getLunar();
     
     const todayYearGanzhi = getYearGanzhi(today.getFullYear());
-    const todayMonthGanzhi = getMonthGanzhi(todayYearGanzhi.stem, todayLunar.getMonth());
+    const todayMonthGanzhi = getMonthGanzhi(todayYearGanzhi.text.charAt(0), todayLunar.getMonth());
     const todayDayGanzhi = getDayGanzhi(today);
     const currentHour = today.getHours();
-    const todayHourGanzhi = getHourGanzhi(todayDayGanzhi.stem, currentHour);
+    const todayHourGanzhi = getHourGanzhi(todayDayGanzhi.text.charAt(0), currentHour);
+    
+    // 打印五行信息
+    console.log('出生年干支五行:', birthYearGanzhi);
+    console.log('出生月干支五行:', birthMonthGanzhi);
+    console.log('出生日干支五行:', birthDayGanzhi);
+    console.log('出生时干支五行:', birthHourGanzhi);
+    
+    console.log('今日年干支五行:', todayYearGanzhi);
+    console.log('今日月干支五行:', todayMonthGanzhi);
+    console.log('今日日干支五行:', todayDayGanzhi);
+    console.log('今日时干支五行:', todayHourGanzhi);
     
     // 获取用户生日信息
     const db = uniCloud.database()
@@ -228,7 +280,7 @@ exports.main = async (event, context) => {
     // 计算12时辰运势
     const hourlyFortune = [];
     for (let hour = 0; hour < 24; hour++) {
-      const hourGanzhi = getHourGanzhi(todayDayGanzhi.stem, hour);
+      const hourGanzhi = getHourGanzhi(todayDayGanzhi.text.charAt(0), hour);
       const score = calculateHourScore({
         year: birthYearGanzhi,
         month: birthMonthGanzhi,
@@ -254,46 +306,39 @@ exports.main = async (event, context) => {
     );
 
     return {
-      code: 0,
-      date: new Date().toLocaleDateString(),
-      luck: advice.mood,
-      color: advice.color,
-      career: advice.career,
-      love: advice.social,
-      health: advice.health,
-      investment: advice.finance,
-      food: advice.diet,
-      bazi: {
-        birth: {
-          year: `${birthYearGanzhi.stem}${birthYearGanzhi.branch}`,
-          month: `${birthMonthGanzhi.stem}${birthMonthGanzhi.branch}`,
-          day: `${birthDayGanzhi.stem}${birthDayGanzhi.branch}`,
-          hour: `${birthHourGanzhi.stem}${birthHourGanzhi.branch}`
+      success: true,
+      data: {
+        luck: fortune.luck,
+        color: fortune.color,
+        career: fortune.career,
+        love: fortune.love,
+        health: fortune.health,
+        investment: fortune.investment,
+        food: fortune.food,
+        bazi: {
+          birth: {
+            year: birthYearGanzhi,
+            month: birthMonthGanzhi,
+            day: birthDayGanzhi,
+            hour: birthHourGanzhi
+          },
+          today: {
+            year: todayYearGanzhi,
+            month: todayMonthGanzhi,
+            day: todayDayGanzhi,
+            hour: todayHourGanzhi
+          }
         },
-        today: {
-          year: `${todayYearGanzhi.stem}${todayYearGanzhi.branch}`,
-          month: `${todayMonthGanzhi.stem}${todayMonthGanzhi.branch}`,
-          day: `${todayDayGanzhi.stem}${todayDayGanzhi.branch}`,
-          hour: `${todayHourGanzhi.stem}${todayHourGanzhi.branch}`
-        }
-      },
-      hourlyFortune
+        hourlyFortune
+      }
     };
     
   } catch (error) {
     console.error('获取建议失败:', error);
     
     return {
-      code: -1,
-      msg: error.message,
-      date: new Date().toLocaleDateString(),
-      luck: '平和',
-      color: '素雅色系',
-      career: '按时作息，规律工作',
-      love: '保持平和心态',
-      health: '规律作息，适量运动',
-      investment: '理性消费',
-      food: '清淡饮食'
+      success: false,
+      error: error.message || '获取建议失败'
     };
   }
 };

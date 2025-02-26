@@ -24,67 +24,220 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.my-container {
-  min-height: 100vh;
-  background-color: #f8f9fa;
-}
-.my-container .user-info {
-  background: #fff;
-  padding: 40rpx;
-  display: flex;
-  align-items: center;
-  margin-bottom: 20rpx;
-}
-.my-container .user-info .user-circle {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 60rpx;
-  background: linear-gradient(45deg, #007AFF, #5856D6);
+/* 系统颜色 */
+/* 五行颜色 */
+/* 金 */
+/* 木 */
+/* 水 */
+/* 火 */
+/* 土 */
+/* 渐变色 */
+/* 主题色 */
+/* 背景颜色 */
+/* 文字颜色 */
+/* 边框和阴影 */
+/* 圆角 */
+/* 间距 */
+/* 字体大小 */
+/* 字重 */
+/* 混合器 */
+/* 按钮样式 */
+.btn-primary {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 30rpx;
+  transition: all 0.2s ease;
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  color: #FFFFFF;
 }
-.my-container .user-info .user-circle .initial {
-  color: #fff;
-  font-size: 48rpx;
-  font-weight: 500;
+.btn-primary:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-secondary {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(120deg, #AF52DE, #FF2D55);
+  color: #FFFFFF;
+}
+.btn-secondary:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-success {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(to right, #34C759, #5AC8FA);
+  color: #FFFFFF;
+}
+.btn-success:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-warning {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(to right, #FF9500, #FFCC00);
+  color: #FFFFFF;
+}
+.btn-warning:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+/* 卡片样式 */
+.card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  padding: 32rpx;
+}
+/* 文字渐变 */
+.text-gradient {
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* 布局工具 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 阴影 */
+.shadow-sm {
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+.shadow-md {
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+.shadow-lg {
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.15);
+}
+.my-container {
+  min-height: 100vh;
+  background-color: #F2F2F7;
+}
+.my-container .user-info {
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  padding: 40rpx 32rpx;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.my-container .user-info::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.05));
+}
+.my-container .user-info .avatar-container {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 24rpx;
+}
+.my-container .user-info .avatar-container .avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
 }
 .my-container .user-info .info {
-  flex: 1;
+  position: relative;
+  z-index: 1;
+  text-align: center;
 }
 .my-container .user-info .info .nickname {
-  font-size: 32rpx;
-  color: #333;
-  font-weight: 500;
-  margin-bottom: 10rpx;
+  font-size: 48rpx;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 12rpx;
   display: block;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
 .my-container .user-info .info .desc {
   font-size: 28rpx;
-  color: #666;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  line-height: 1.6;
 }
 .my-container .menu-list {
-  background: #fff;
-  margin-top: 20rpx;
+  margin: 32rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 .my-container .menu-list .menu-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30rpx 40rpx;
-  border-bottom: 1rpx solid #f5f5f5;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid rgba(60, 60, 67, 0.1);
 }
-.my-container .menu-list .menu-item .item-text {
-  font-size: 28rpx;
-  color: #333;
+.my-container .menu-list .menu-item .item-left {
+  display: flex;
+  align-items: center;
+}
+.my-container .menu-list .menu-item .item-left .icon-wrapper {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 24rpx;
+  background: rgba(0, 122, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+.my-container .menu-list .menu-item .item-left .icon-wrapper .iconfont {
+  font-size: 40rpx;
+}
+.my-container .menu-list .menu-item .item-left .icon-wrapper:nth-child(2) {
+  background: rgba(175, 82, 222, 0.1);
+}
+.my-container .menu-list .menu-item .item-left .item-text {
+  font-size: 32rpx;
+  color: #000000;
+  font-weight: 500;
 }
 .my-container .menu-list .menu-item .arrow {
-  font-size: 28rpx;
-  color: #999;
+  font-size: 40rpx;
+  color: #8E8E93;
+  line-height: 1;
 }
 .my-container .menu-list .menu-item:active {
-  background-color: #f8f9fa;
+  background-color: #EFEFF4;
 }
 .my-container .menu-list .menu-item:last-child {
   border-bottom: none;

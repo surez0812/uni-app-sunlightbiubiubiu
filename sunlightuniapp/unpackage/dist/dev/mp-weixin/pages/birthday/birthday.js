@@ -181,16 +181,11 @@ var _default = {
   data: function data() {
     return {
       birthday: '',
-      birthTime: ''
+      birthTime: '12:00',
+      loading: false
     };
   },
   methods: {
-    onBirthdayChange: function onBirthdayChange(e) {
-      this.birthday = e.detail.value;
-    },
-    onBirthTimeChange: function onBirthTimeChange(e) {
-      this.birthTime = e.detail.value;
-    },
     saveBirthday: function saveBirthday() {
       var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
@@ -199,65 +194,63 @@ var _default = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(!_this.birthday || !_this.birthTime)) {
+                if (_this.birthday) {
                   _context.next = 3;
                   break;
                 }
                 uni.showToast({
-                  title: '请填写完整信息',
+                  title: '请选择出生日期',
                   icon: 'none'
                 });
                 return _context.abrupt("return");
               case 3:
-                _context.prev = 3;
+                _this.loading = true;
+                _context.prev = 4;
                 db = uniCloud.database();
-                _context.next = 7;
+                _context.next = 8;
                 return db.collection('user_info').add({
                   birthday: _this.birthday,
                   birthTime: _this.birthTime,
-                  create_date: Date.now()
+                  create_date: Math.floor(Date.now() / 1000)
                 });
-              case 7:
+              case 8:
                 uni.showToast({
-                  title: '信息已保存',
-                  icon: 'success',
-                  duration: 1500
+                  title: '保存成功',
+                  icon: 'success'
                 });
                 setTimeout(function () {
-                  var pages = getCurrentPages();
-                  if (pages.length > 1) {
-                    uni.navigateBack({
-                      delta: 1
-                    });
-                  } else {
-                    uni.navigateTo({
-                      url: '/pages/welcome/welcome',
-                      fail: function fail(err) {
-                        console.error('页面跳转失败:', err);
-                        uni.switchTab({
-                          url: '/pages/welcome/welcome'
-                        });
-                      }
-                    });
-                  }
+                  // 使用 switchTab 跳转到 tabBar 页面
+                  uni.switchTab({
+                    url: '/pages/welcome/welcome'
+                  });
                 }, 1500);
-                _context.next = 15;
+                _context.next = 16;
                 break;
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](3);
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](4);
                 console.error('保存失败:', _context.t0);
                 uni.showToast({
                   title: '保存失败，请重试',
                   icon: 'none'
                 });
-              case 15:
+              case 16:
+                _context.prev = 16;
+                _this.loading = false;
+                return _context.finish(16);
+              case 19:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 11]]);
+        }, _callee, null, [[4, 12, 16, 19]]);
       }))();
+    },
+    onBirthdayChange: function onBirthdayChange(e) {
+      this.birthday = e.detail.value;
+    },
+    onTimeChange: function onTimeChange(e) {
+      this.birthTime = e.detail.value;
     }
   }
 };

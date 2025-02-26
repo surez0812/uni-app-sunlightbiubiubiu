@@ -1,23 +1,33 @@
 <template>
   <view class="my-container">
     <view class="user-info">
-      <view class="user-circle">
-        <text class="initial">生</text>
+      <view class="avatar-container">
+        <image class="avatar" src="/static/images/avatar.svg" mode="aspectFill"></image>
       </view>
       <view class="info">
-        <text class="nickname">生活助手</text>
-        <text class="desc">让生活更有规律</text>
+        <text class="nickname">熹色</text>
+        <text class="desc">「熹色」是一款专注生活美学的个性化工具。根据天气、场合与心情，为你生成每日穿搭色卡与生活灵感：通勤日的干练配色，约会夜的温柔搭配，休闲时光的活力碰撞……熹色用色彩点亮生活仪式感，助你发现日常中的小确幸。</text>
       </view>
     </view>
 
     <view class="menu-list">
       <view class="menu-item" @tap="editBirthday">
-        <text class="item-text">修改个人信息</text>
-        <text class="arrow">></text>
+        <view class="item-left">
+          <view class="icon-wrapper">
+            <text class="iconfont">🎂</text>
+          </view>
+          <text class="item-text">修改个人信息</text>
+        </view>
+        <text class="arrow">›</text>
       </view>
       <view class="menu-item">
-        <text class="item-text">关于我们</text>
-        <text class="arrow">></text>
+        <view class="item-left">
+          <view class="icon-wrapper">
+            <text class="iconfont">ℹ️</text>
+          </view>
+          <text class="item-text">关于我们</text>
+        </view>
+        <text class="arrow">›</text>
       </view>
     </view>
   </view>
@@ -39,75 +49,118 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/theme.scss';
+
 .my-container {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: $color-bg-primary;
   
   .user-info {
-    background: #fff;
-    padding: 40rpx;
+    background: $color-primary-gradient;
+    padding: $spacing-2xl $spacing-xl;
+    position: relative;
+    overflow: hidden;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20rpx;
     
-    .user-circle {
-      width: 120rpx;
-      height: 120rpx;
-      border-radius: 60rpx;
-      background: linear-gradient(45deg, #007AFF, #5856D6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 30rpx;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.05));
+    }
+    
+    .avatar-container {
+      position: relative;
+      z-index: 1;
+      margin-bottom: $spacing-lg;
       
-      .initial {
-        color: #fff;
-        font-size: 48rpx;
-        font-weight: 500;
+      .avatar {
+        width: 160rpx;
+        height: 160rpx;
+        border-radius: 50%;
+        border: 4rpx solid #fff;
+        box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
       }
     }
     
     .info {
-      flex: 1;
+      position: relative;
+      z-index: 1;
+      text-align: center;
       
       .nickname {
-        font-size: 32rpx;
-        color: #333;
-        font-weight: 500;
-        margin-bottom: 10rpx;
+        font-size: $font-2xl;
+        color: #fff;
+        font-weight: $weight-semibold;
+        margin-bottom: $spacing-sm;
         display: block;
+        text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
       }
       
       .desc {
-        font-size: 28rpx;
-        color: #666;
+        font-size: $font-sm;
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+        line-height: 1.6;
       }
     }
   }
   
   .menu-list {
-    background: #fff;
-    margin-top: 20rpx;
+    margin: $spacing-xl;
+    background: $color-bg-card;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+    overflow: hidden;
     
     .menu-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 30rpx 40rpx;
-      border-bottom: 1rpx solid #f5f5f5;
+      padding: $spacing-lg $spacing-xl;
+      border-bottom: 1rpx solid $color-border;
       
-      .item-text {
-        font-size: 28rpx;
-        color: #333;
+      .item-left {
+        display: flex;
+        align-items: center;
+        
+        .icon-wrapper {
+          width: 72rpx;
+          height: 72rpx;
+          border-radius: $radius-lg;
+          background: rgba($color-system-blue, 0.1);
+          @include flex-center;
+          margin-right: $spacing-lg;
+          
+          .iconfont {
+            font-size: $font-xl;
+          }
+          
+          &:nth-child(2) {
+            background: rgba($color-system-purple, 0.1);
+          }
+        }
+        
+        .item-text {
+          font-size: $font-md;
+          color: $color-text-primary;
+          font-weight: $weight-medium;
+        }
       }
       
       .arrow {
-        font-size: 28rpx;
-        color: #999;
+        font-size: $font-xl;
+        color: $color-text-quaternary;
+        line-height: 1;
       }
       
       &:active {
-        background-color: #f8f9fa;
+        background-color: $color-bg-tertiary;
       }
       
       &:last-child {

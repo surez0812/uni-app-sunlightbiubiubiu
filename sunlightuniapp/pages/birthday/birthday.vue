@@ -16,12 +16,12 @@
 
       <view class="form-group">
         <text class="label">出生时间</text>
-        <picker mode="time" :value="birthTime" @change="onBirthTimeChange" class="picker">
+        <picker mode="time" :value="birthTime" @change="onTimeChange" class="picker">
           <view class="picker-value">{{ birthTime || '请选择时间' }}</view>
         </picker>
       </view>
 
-      <button class="submit-btn" @tap="saveBirthday" :disabled="!birthday || !birthTime">
+      <button class="submit-btn" @tap="saveBirthday" :disabled="!birthday || loading">
         开始使用
       </button>
 
@@ -35,56 +35,39 @@ export default {
   data() {
     return {
       birthday: '',
-      birthTime: ''
+      birthTime: '12:00',
+      loading: false
     }
   },
   methods: {
-    onBirthdayChange(e) {
-      this.birthday = e.detail.value
-    },
-    onBirthTimeChange(e) {
-      this.birthTime = e.detail.value
-    },
     async saveBirthday() {
-      if (!this.birthday || !this.birthTime) {
+      if (!this.birthday) {
         uni.showToast({
-          title: '请填写完整信息',
+          title: '请选择出生日期',
           icon: 'none'
         })
         return
       }
 
+      this.loading = true
       try {
         const db = uniCloud.database()
         await db.collection('user_info').add({
           birthday: this.birthday,
           birthTime: this.birthTime,
-          create_date: Date.now()
+          create_date: Math.floor(Date.now() / 1000)
         })
 
         uni.showToast({
-          title: '信息已保存',
-          icon: 'success',
-          duration: 1500
+          title: '保存成功',
+          icon: 'success'
         })
 
         setTimeout(() => {
-          const pages = getCurrentPages()
-          if (pages.length > 1) {
-            uni.navigateBack({
-              delta: 1
-            })
-          } else {
-            uni.navigateTo({
-              url: '/pages/welcome/welcome',
-              fail: (err) => {
-                console.error('页面跳转失败:', err)
-                uni.switchTab({
-                  url: '/pages/welcome/welcome'
-                })
-              }
-            })
-          }
+          // 使用 switchTab 跳转到 tabBar 页面
+          uni.switchTab({
+            url: '/pages/welcome/welcome'
+          })
         }, 1500)
       } catch (error) {
         console.error('保存失败:', error)
@@ -92,7 +75,17 @@ export default {
           title: '保存失败，请重试',
           icon: 'none'
         })
+      } finally {
+        this.loading = false
       }
+    },
+
+    onBirthdayChange(e) {
+      this.birthday = e.detail.value
+    },
+
+    onTimeChange(e) {
+      this.birthTime = e.detail.value
     }
   }
 }

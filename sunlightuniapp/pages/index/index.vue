@@ -94,7 +94,7 @@
 						});
 					} else {
 						// 已录入生日，跳转到欢迎页面
-						uni.navigateTo({
+						uni.switchTab({
 							url: '/pages/welcome/welcome'
 						});
 					}

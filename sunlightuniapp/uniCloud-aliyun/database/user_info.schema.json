@@ -20,8 +20,8 @@
       "description": "出生时间，格式：HH:mm"
     },
     "create_date": {
-      "bsonType": "timestamp",
-      "description": "记录创建时间"
+      "bsonType": "int",
+      "description": "记录创建时间（时间戳）"
     }
   }
 }

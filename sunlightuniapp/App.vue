@@ -31,7 +31,7 @@
 				} else {
 					console.log('找到生日数据，跳转到欢迎页面');
 					// 有生日数据，跳转到欢迎页面
-					uni.redirectTo({
+					uni.switchTab({
 						url: '/pages/welcome/welcome'
 					});
 				}
