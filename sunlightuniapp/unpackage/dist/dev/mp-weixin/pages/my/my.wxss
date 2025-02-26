@@ -1,0 +1,245 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/* 系统颜色 */
+/* 五行颜色 */
+/* 金 */
+/* 木 */
+/* 水 */
+/* 火 */
+/* 土 */
+/* 渐变色 */
+/* 主题色 */
+/* 背景颜色 */
+/* 文字颜色 */
+/* 边框和阴影 */
+/* 圆角 */
+/* 间距 */
+/* 字体大小 */
+/* 字重 */
+/* 混合器 */
+/* 按钮样式 */
+.btn-primary {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  color: #FFFFFF;
+}
+.btn-primary:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-secondary {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(120deg, #AF52DE, #FF2D55);
+  color: #FFFFFF;
+}
+.btn-secondary:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-success {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(to right, #34C759, #5AC8FA);
+  color: #FFFFFF;
+}
+.btn-success:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-warning {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(to right, #FF9500, #FFCC00);
+  color: #FFFFFF;
+}
+.btn-warning:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+/* 卡片样式 */
+.card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  padding: 32rpx;
+}
+/* 文字渐变 */
+.text-gradient {
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* 布局工具 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 阴影 */
+.shadow-sm {
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+.shadow-md {
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+.shadow-lg {
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.15);
+}
+.my-container {
+  min-height: 100vh;
+  background-color: #F2F2F7;
+}
+.my-container .user-info {
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  padding: 40rpx 32rpx;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.my-container .user-info::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.05));
+}
+.my-container .user-info .avatar-container {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 24rpx;
+}
+.my-container .user-info .avatar-container .avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+.my-container .user-info .info {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.my-container .user-info .info .nickname {
+  font-size: 48rpx;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+  display: block;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.my-container .user-info .info .desc {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  line-height: 1.6;
+}
+.my-container .menu-list {
+  margin: 32rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.my-container .menu-list .menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid rgba(60, 60, 67, 0.1);
+}
+.my-container .menu-list .menu-item .item-left {
+  display: flex;
+  align-items: center;
+}
+.my-container .menu-list .menu-item .item-left .icon-wrapper {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 24rpx;
+  background: rgba(0, 122, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+.my-container .menu-list .menu-item .item-left .icon-wrapper .iconfont {
+  font-size: 40rpx;
+}
+.my-container .menu-list .menu-item .item-left .icon-wrapper:nth-child(2) {
+  background: rgba(175, 82, 222, 0.1);
+}
+.my-container .menu-list .menu-item .item-left .item-text {
+  font-size: 32rpx;
+  color: #000000;
+  font-weight: 500;
+}
+.my-container .menu-list .menu-item .arrow {
+  font-size: 40rpx;
+  color: #8E8E93;
+  line-height: 1;
+}
+.my-container .menu-list .menu-item:active {
+  background-color: #EFEFF4;
+}
+.my-container .menu-list .menu-item:last-child {
+  border-bottom: none;
+}
+

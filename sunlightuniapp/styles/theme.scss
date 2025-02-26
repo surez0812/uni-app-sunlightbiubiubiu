@@ -1,0 +1,168 @@
+/* 系统颜色 */
+$color-system-blue: #007AFF;
+$color-system-green: #34C759;
+$color-system-indigo: #5856D6;
+$color-system-orange: #FF9500;
+$color-system-pink: #FF2D55;
+$color-system-purple: #AF52DE;
+$color-system-red: #FF3B30;
+$color-system-teal: #5AC8FA;
+$color-system-yellow: #FFCC00;
+
+/* 五行颜色 */
+$color-system-gold: #D4AF37;   /* 金 */
+$color-system-wood: #228B22;   /* 木 */
+$color-system-water: #1E90FF;  /* 水 */
+$color-system-fire: #FF4500;   /* 火 */
+$color-system-earth: #CD853F;  /* 土 */
+
+/* 渐变色 */
+$color-primary-gradient: linear-gradient(45deg, $color-system-blue, $color-system-indigo);
+$color-secondary-gradient: linear-gradient(120deg, $color-system-purple, $color-system-pink);
+$color-success-gradient: linear-gradient(to right, $color-system-green, $color-system-teal);
+$color-warning-gradient: linear-gradient(to right, $color-system-orange, $color-system-yellow);
+
+/* 主题色 */
+$color-theme-primary: $color-system-blue;
+$color-theme-secondary: $color-system-purple;
+$color-theme-success: $color-system-green;
+$color-theme-warning: $color-system-orange;
+$color-theme-danger: $color-system-red;
+
+/* 背景颜色 */
+$color-bg-primary: #F2F2F7;
+$color-bg-secondary: #FFFFFF;
+$color-bg-tertiary: #EFEFF4;
+$color-bg-card: #FFFFFF;
+
+/* 文字颜色 */
+$color-text-primary: #000000;
+$color-text-secondary: #3C3C43;
+$color-text-tertiary: #48484A;
+$color-text-quaternary: #8E8E93;
+
+/* 边框和阴影 */
+$color-border: rgba(60, 60, 67, 0.1);
+$color-border-light: rgba(60, 60, 67, 0.05);
+$shadow-sm: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8rpx 16rpx rgba(0, 0, 0, 0.15);
+
+/* 圆角 */
+$radius-sm: 8rpx;
+$radius-md: 16rpx;
+$radius-lg: 24rpx;
+$radius-xl: 32rpx;
+$radius-full: 999rpx;
+
+/* 间距 */
+$spacing-2xs: 4rpx;
+$spacing-xs: 8rpx;
+$spacing-sm: 12rpx;
+$spacing-md: 16rpx;
+$spacing-lg: 24rpx;
+$spacing-xl: 32rpx;
+$spacing-2xl: 40rpx;
+$spacing-3xl: 48rpx;
+
+/* 字体大小 */
+$font-2xs: 20rpx;
+$font-xs: 24rpx;
+$font-sm: 28rpx;
+$font-md: 32rpx;
+$font-lg: 36rpx;
+$font-xl: 40rpx;
+$font-2xl: 48rpx;
+
+/* 字重 */
+$weight-regular: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+/* 混合器 */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin card-style {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-xl;
+}
+
+@mixin gradient-text {
+  background: $color-primary-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin system-button {
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-full;
+  font-size: $font-md;
+  font-weight: $weight-semibold;
+  @include flex-center;
+  transition: all 0.2s ease;
+  
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+/* 按钮样式 */
+.btn-primary {
+  @include system-button;
+  background: $color-primary-gradient;
+  color: #FFFFFF;
+}
+
+.btn-secondary {
+  @include system-button;
+  background: $color-secondary-gradient;
+  color: #FFFFFF;
+}
+
+.btn-success {
+  @include system-button;
+  background: $color-success-gradient;
+  color: #FFFFFF;
+}
+
+.btn-warning {
+  @include system-button;
+  background: $color-warning-gradient;
+  color: #FFFFFF;
+}
+
+/* 卡片样式 */
+.card {
+  @include card-style;
+}
+
+/* 文字渐变 */
+.text-gradient {
+  @include gradient-text;
+}
+
+/* 布局工具 */
+.flex-center {
+  @include flex-center;
+}
+
+/* 阴影 */
+.shadow-sm {
+  box-shadow: $shadow-sm;
+}
+
+.shadow-md {
+  box-shadow: $shadow-md;
+}
+
+.shadow-lg {
+  box-shadow: $shadow-lg;
+}

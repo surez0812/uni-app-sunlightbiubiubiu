@@ -10023,7 +10023,7 @@ var b = "development" === "development",
   k = "true" === undefined || !0 === undefined,
   P = T([]),
   C = "h5" === E ? "web" : "app-plus" === E || "app-harmony" === E ? "app" : E,
-  A = T({"address":["127.0.0.1","10.4.1.104","169.254.123.115"],"servePort":7001,"debugPort":9000,"initialLaunchType":"remote","skipFiles":["<node_internals>/**","/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"]}),
+  A = T({"address":["127.0.0.1","192.168.3.140","10.4.156.22"],"servePort":7001,"debugPort":9000,"initialLaunchType":"remote","skipFiles":["<node_internals>/**","/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"]}),
   O = T([{"provider":"aliyun","spaceName":"sure-hello-test","spaceId":"mp-6ff62194-5475-4b3f-922e-ed572ead7f13","clientSecret":"YXH9AIHmRylSsTL2VPDcEQ==","endpoint":"https://api.next.bspapp.com"}]) || [],
   x = true;
 var N = "";
@@ -18415,46 +18415,45 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   "pages": [{
-    "path": "pages/index/index",
+    "path": "pages/welcome/welcome",
     "style": {
-      "navigationBarTitleText": "首页"
-    }
-  }, {
-    "path": "pages/register/register",
-    "style": {
-      "navigationBarTitleText": "注册"
+      "navigationBarTitleText": "生活助手",
+      "enablePullDownRefresh": true
     }
   }, {
     "path": "pages/birthday/birthday",
     "style": {
-      "navigationBarTitleText": "录入生日"
+      "navigationBarTitleText": "个人信息",
+      "navigationStyle": "custom"
     }
   }, {
-    "path": "pages/welcome/welcome",
+    "path": "pages/my/my",
     "style": {
-      "navigationBarTitleText": "今日建议"
+      "navigationBarTitleText": "我的"
     }
   }],
-  "globalStyle": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
-  },
   "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#007AFF",
+    "backgroundColor": "#FFFFFF",
     "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页",
+      "pagePath": "pages/welcome/welcome",
+      "text": "每日建议",
       "iconPath": "static/tabbar/home.png",
       "selectedIconPath": "static/tabbar/home-active.png"
     }, {
-      "pagePath": "pages/welcome/welcome",
+      "pagePath": "pages/my/my",
       "text": "我的",
       "iconPath": "static/tabbar/user.png",
       "selectedIconPath": "static/tabbar/user-active.png"
     }]
   },
-  "uniIdRouter": {}
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "生活助手",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
 };
 exports.default = _default;
 
