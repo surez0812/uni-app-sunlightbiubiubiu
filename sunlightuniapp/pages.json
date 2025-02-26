@@ -29,14 +29,14 @@
 			{
 				"pagePath": "pages/welcome/welcome",
 				"text": "每日建议",
-				"iconPath": "static/tabbar/home.png",
-				"selectedIconPath": "static/tabbar/home-active.png"
+				"iconPath": "static/tabbar/home.svg",
+				"selectedIconPath": "static/tabbar/home-active.svg"
 			},
 			{
 				"pagePath": "pages/my/my",
 				"text": "我的",
-				"iconPath": "static/tabbar/user.png",
-				"selectedIconPath": "static/tabbar/user-active.png"
+				"iconPath": "static/tabbar/user.svg",
+				"selectedIconPath": "static/tabbar/user-active.svg"
 			}
 		]
 	},
