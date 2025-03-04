@@ -1,15 +1,12 @@
-const { initWeixin } = require('./lib/utils/weixin')
-const { userInfo, createApi, useUniIdCommon } = require('uni-id-common')
+const { userInfo, createApi, useUniIdCommon } = require('uni-id-co')
 
 module.exports = {
-  _before: async function() {
+  _before: function() {
     // 通过useUniIdCommon获取uni-id实例
     this.uniID = useUniIdCommon.call(this)
-    // 初始化微信
-    await initWeixin.call(this)
   },
 
-  async loginByWeixin() {
+  async login() {
     const { code } = this.getParams()
     
     // 获取微信openid

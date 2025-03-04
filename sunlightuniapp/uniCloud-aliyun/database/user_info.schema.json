@@ -1,0 +1,27 @@
+{
+  "bsonType": "object",
+  "required": ["birthday", "birthTime", "create_date"],
+  "permission": {
+    "read": true,
+    "create": true,
+    "update": true,
+    "delete": false
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "birthday": {
+      "bsonType": "string",
+      "description": "出生日期，格式：YYYY-MM-DD"
+    },
+    "birthTime": {
+      "bsonType": "string",
+      "description": "出生时间，格式：HH:mm"
+    },
+    "create_date": {
+      "bsonType": "int",
+      "description": "记录创建时间（时间戳）"
+    }
+  }
+}

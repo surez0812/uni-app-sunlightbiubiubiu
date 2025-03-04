@@ -82,10 +82,9 @@
 			async checkBirthday() {
 				try {
 					const db = uniCloud.database();
-					const { result } = await db.collection('user_birthdays')
-						.where({
-							user_id: this.uniID.uid
-						})
+					const { result } = await db.collection('user_info')
+						.orderBy('create_date', 'desc')
+						.limit(1)
 						.get();
 					
 					if (!result.data.length) {
@@ -95,7 +94,7 @@
 						});
 					} else {
 						// 已录入生日，跳转到欢迎页面
-						uni.navigateTo({
+						uni.switchTab({
 							url: '/pages/welcome/welcome'
 						});
 					}

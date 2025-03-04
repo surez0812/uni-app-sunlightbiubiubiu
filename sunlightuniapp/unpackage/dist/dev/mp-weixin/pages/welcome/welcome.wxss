@@ -1,0 +1,556 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/* 系统颜色 */
+/* 五行颜色 */
+/* 金 */
+/* 木 */
+/* 水 */
+/* 火 */
+/* 土 */
+/* 渐变色 */
+/* 主题色 */
+/* 背景颜色 */
+/* 文字颜色 */
+/* 边框和阴影 */
+/* 圆角 */
+/* 间距 */
+/* 字体大小 */
+/* 字重 */
+/* 混合器 */
+/* 按钮样式 */
+.btn-primary {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  color: #FFFFFF;
+}
+.btn-primary:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-secondary {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(120deg, #AF52DE, #FF2D55);
+  color: #FFFFFF;
+}
+.btn-secondary:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-success {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(to right, #34C759, #5AC8FA);
+  color: #FFFFFF;
+}
+.btn-success:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.btn-warning {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: linear-gradient(to right, #FF9500, #FFCC00);
+  color: #FFFFFF;
+}
+.btn-warning:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+/* 卡片样式 */
+.card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  padding: 32rpx;
+}
+/* 文字渐变 */
+.text-gradient {
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* 布局工具 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 阴影 */
+.shadow-sm {
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+}
+.shadow-md {
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+.shadow-lg {
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.15);
+}
+.welcome-container {
+  min-height: 100vh;
+  background-color: #F2F2F7;
+}
+.welcome-container .content-container {
+  padding: 16rpx;
+  display: flex;
+  flex-direction: column;
+}
+.welcome-container .header {
+  background: linear-gradient(45deg, #007AFF, #5856D6);
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.welcome-container .header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.05));
+  z-index: 1;
+  border-radius: 999rpx;
+}
+.welcome-container .header .info-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.welcome-container .header .info-row .date-info .today-date {
+  font-size: 40rpx;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+  display: block;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.welcome-container .header .info-row .date-info .birth-date {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.welcome-container .header .info-row .weather-info {
+  text-align: right;
+}
+.welcome-container .header .info-row .weather-info .weather-main {
+  margin-bottom: 8rpx;
+}
+.welcome-container .header .info-row .weather-info .weather-main .temp {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 600;
+  margin-right: 8rpx;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.welcome-container .header .info-row .weather-info .weather-main .weather-desc {
+  font-size: 36rpx;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.welcome-container .header .info-row .weather-info .weather-detail {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+.welcome-container .header .info-row .weather-info .weather-detail text {
+  margin-left: 12rpx;
+}
+.welcome-container .header .info-row .weather-info .weather-detail text:first-child {
+  margin-left: 0;
+}
+.welcome-container .bazi-info {
+  margin-bottom: 12rpx;
+}
+.welcome-container .bazi-info .section {
+  margin-bottom: 12rpx;
+}
+.welcome-container .bazi-info .section .section-title {
+  font-size: 32rpx;
+  color: #3C3C43;
+  margin-bottom: 8rpx;
+}
+.welcome-container .bazi-info .section .bazi-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 12rpx;
+}
+.welcome-container .bazi-info .section .bazi-grid .bazi-card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 12rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+.welcome-container .bazi-info .section .bazi-grid .bazi-card .bazi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12rpx;
+}
+.welcome-container .bazi-info .section .bazi-grid .bazi-card .bazi-row .bazi-cell {
+  text-align: center;
+}
+.welcome-container .bazi-info .section .bazi-grid .bazi-card .bazi-row .bazi-cell .bazi-label {
+  font-size: 24rpx;
+  color: #8E8E93;
+  margin-bottom: 0;
+  display: block;
+}
+.welcome-container .bazi-info .section .bazi-grid .bazi-card .bazi-row .bazi-cell .bazi-chars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.welcome-container .bazi-info .section .bazi-grid .bazi-card .bazi-row .bazi-cell .bazi-chars .bazi-char {
+  margin: 0 8rpx;
+  font-size: 20px;
+  font-weight: bold;
+}
+.welcome-container .advice-card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+.welcome-container .advice-card .section-title {
+  font-size: 36rpx;
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 24rpx;
+}
+.welcome-container .advice-card .content {
+  font-size: 32rpx;
+  color: #3C3C43;
+  line-height: 1.6;
+}
+.welcome-container .fortune-chart {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.welcome-container .fortune-chart .section-title {
+  font-size: 36rpx;
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 24rpx;
+}
+.welcome-container .fortune-chart .chart-container {
+  display: flex;
+  padding: 24rpx 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.welcome-container .fortune-chart .chart-container::-webkit-scrollbar {
+  display: none;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar {
+  flex: 0 0 auto;
+  width: 100rpx;
+  margin-right: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar:last-child {
+  margin-right: 0;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .bar-wrapper {
+  width: 40rpx;
+  height: 160rpx;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 999rpx;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12rpx;
+  box-shadow: inset 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .bar-wrapper::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.1), transparent);
+  z-index: 1;
+  border-radius: 999rpx;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .bar-wrapper .bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 999rpx;
+  -webkit-animation: pulse 2s infinite;
+          animation: pulse 2s infinite;
+}
+@-webkit-keyframes pulse {
+0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+}
+70% {
+    box-shadow: 0 0 0 6rpx rgba(0, 0, 0, 0);
+}
+100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+}
+@keyframes pulse {
+0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
+}
+70% {
+    box-shadow: 0 0 0 6rpx rgba(0, 0, 0, 0);
+}
+100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .bar-wrapper .bar.mood-hot {
+  background: linear-gradient(to top, #FF3B30, #ff6b63);
+  box-shadow: 0 4rpx 8rpx rgba(255, 59, 48, 0.3);
+  -webkit-animation: flame-red 1.5s infinite alternate;
+          animation: flame-red 1.5s infinite alternate;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .bar-wrapper .bar.mood-warm {
+  background: linear-gradient(to top, #FF9500, #ffaa33);
+  box-shadow: 0 4rpx 8rpx rgba(255, 149, 0, 0.3);
+  -webkit-animation: flame-orange 1.5s infinite alternate;
+          animation: flame-orange 1.5s infinite alternate;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .bar-wrapper .bar.mood-mild {
+  background: linear-gradient(to top, #FFCC00, #ffd633);
+  box-shadow: 0 4rpx 8rpx rgba(255, 204, 0, 0.3);
+  -webkit-animation: flame-yellow 1.5s infinite alternate;
+          animation: flame-yellow 1.5s infinite alternate;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .bar-wrapper .bar.mood-cool {
+  background: linear-gradient(to top, #007AFF, #3395ff);
+  box-shadow: 0 4rpx 8rpx rgba(0, 122, 255, 0.3);
+  -webkit-animation: flame-blue 1.5s infinite alternate;
+          animation: flame-blue 1.5s infinite alternate;
+}
+@-webkit-keyframes flame-red {
+0% {
+    -webkit-transform: scaleY(0.95);
+            transform: scaleY(0.95);
+    box-shadow: 0 0 10rpx rgba(255, 59, 48, 0.5);
+}
+100% {
+    -webkit-transform: scaleY(1.05);
+            transform: scaleY(1.05);
+    box-shadow: 0 0 20rpx rgba(255, 59, 48, 0.7);
+}
+}
+@keyframes flame-red {
+0% {
+    -webkit-transform: scaleY(0.95);
+            transform: scaleY(0.95);
+    box-shadow: 0 0 10rpx rgba(255, 59, 48, 0.5);
+}
+100% {
+    -webkit-transform: scaleY(1.05);
+            transform: scaleY(1.05);
+    box-shadow: 0 0 20rpx rgba(255, 59, 48, 0.7);
+}
+}
+@-webkit-keyframes flame-orange {
+0% {
+    -webkit-transform: scaleY(0.95);
+            transform: scaleY(0.95);
+    box-shadow: 0 0 10rpx rgba(255, 149, 0, 0.5);
+}
+100% {
+    -webkit-transform: scaleY(1.05);
+            transform: scaleY(1.05);
+    box-shadow: 0 0 20rpx rgba(255, 149, 0, 0.7);
+}
+}
+@keyframes flame-orange {
+0% {
+    -webkit-transform: scaleY(0.95);
+            transform: scaleY(0.95);
+    box-shadow: 0 0 10rpx rgba(255, 149, 0, 0.5);
+}
+100% {
+    -webkit-transform: scaleY(1.05);
+            transform: scaleY(1.05);
+    box-shadow: 0 0 20rpx rgba(255, 149, 0, 0.7);
+}
+}
+@-webkit-keyframes flame-yellow {
+0% {
+    -webkit-transform: scaleY(0.95);
+            transform: scaleY(0.95);
+    box-shadow: 0 0 10rpx rgba(255, 204, 0, 0.5);
+}
+100% {
+    -webkit-transform: scaleY(1.05);
+            transform: scaleY(1.05);
+    box-shadow: 0 0 20rpx rgba(255, 204, 0, 0.7);
+}
+}
+@keyframes flame-yellow {
+0% {
+    -webkit-transform: scaleY(0.95);
+            transform: scaleY(0.95);
+    box-shadow: 0 0 10rpx rgba(255, 204, 0, 0.5);
+}
+100% {
+    -webkit-transform: scaleY(1.05);
+            transform: scaleY(1.05);
+    box-shadow: 0 0 20rpx rgba(255, 204, 0, 0.7);
+}
+}
+@-webkit-keyframes flame-blue {
+0% {
+    -webkit-transform: scaleY(0.95);
+            transform: scaleY(0.95);
+    box-shadow: 0 0 10rpx rgba(0, 122, 255, 0.5);
+}
+100% {
+    -webkit-transform: scaleY(1.05);
+            transform: scaleY(1.05);
+    box-shadow: 0 0 20rpx rgba(0, 122, 255, 0.7);
+}
+}
+@keyframes flame-blue {
+0% {
+    -webkit-transform: scaleY(0.95);
+            transform: scaleY(0.95);
+    box-shadow: 0 0 10rpx rgba(0, 122, 255, 0.5);
+}
+100% {
+    -webkit-transform: scaleY(1.05);
+            transform: scaleY(1.05);
+    box-shadow: 0 0 20rpx rgba(0, 122, 255, 0.7);
+}
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .time-label {
+  font-size: 24rpx;
+  color: #8E8E93;
+  margin-bottom: 4rpx;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .score-label {
+  font-size: 20rpx;
+  color: #48484A;
+  margin-bottom: 4rpx;
+}
+.welcome-container .fortune-chart .chart-container .fortune-bar .advice-label {
+  font-size: 24rpx;
+  color: #3C3C43;
+  text-align: center;
+  width: 80rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.welcome-container .advice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+}
+.welcome-container .advice-grid .advice-card .section-title {
+  font-size: 32rpx;
+}
+.welcome-container .disclaimer {
+  margin: 40rpx 0;
+  padding: 24rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #8E8E93;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 24rpx;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.welcome-container .ganzhi-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.welcome-container .ganzhi-text text {
+  margin: 0 8rpx;
+}
+.welcome-container .ganzhi-text .wuxing-mu {
+  color: #228B22;
+}
+.welcome-container .ganzhi-text .wuxing-huo {
+  color: #FF4500;
+}
+.welcome-container .ganzhi-text .wuxing-tu {
+  color: #CD853F;
+}
+.welcome-container .ganzhi-text .wuxing-jin {
+  color: #D4AF37;
+}
+.welcome-container .ganzhi-text .wuxing-shui {
+  color: #1E90FF;
+}
+
