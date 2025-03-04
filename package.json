@@ -1,0 +1,14 @@
+{
+  "name": "sunlight-uniapp",
+  "version": "1.0.0",
+  "description": "八字生活建议跨平台应用",
+  "scripts": {
+    "download-icons": "node download_icons.js",
+    "convert-svg": "node convert_svg_to_png.js",
+    "prepare-icons": "npm run download-icons && npm run convert-svg"
+  },
+  "devDependencies": {
+    "sharp": "^0.32.1",
+    "imagemagick": "^0.1.2"
+  }
+} 

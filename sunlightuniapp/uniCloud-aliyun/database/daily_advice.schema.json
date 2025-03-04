@@ -1,0 +1,75 @@
+{
+  "bsonType": "object",
+  "required": ["user_id", "date"],
+  "permission": {
+    "read": true,
+    "create": true,
+    "update": true,
+    "delete": true
+  },
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "user_id": {
+      "bsonType": "string",
+      "description": "用户ID"
+    },
+    "date": {
+      "bsonType": "string",
+      "description": "日期，格式：YYYY-MM-DD"
+    },
+    "weather": {
+      "bsonType": "string",
+      "description": "天气情况"
+    },
+    "birth_date": {
+      "bsonType": "string",
+      "description": "用户出生日期"
+    },
+    "gender": {
+      "bsonType": "string",
+      "description": "用户性别"
+    },
+    "daily_summary": {
+      "bsonType": "string",
+      "description": "今日整体运势总结"
+    },
+    "bazi_duanyan": {
+      "bsonType": "string",
+      "description": "今日八字断言"
+    },
+    "colors_advice": {
+      "bsonType": "string",
+      "description": "今日适合的穿搭配色建议"
+    },
+    "touzi_advice": {
+      "bsonType": "string",
+      "description": "今日投资建议"
+    },
+    "health_advice": {
+      "bsonType": "string",
+      "description": "今日健康建议"
+    },
+    "work_advice": {
+      "bsonType": "string",
+      "description": "今日工作学习建议"
+    },
+    "love_advice": {
+      "bsonType": "string",
+      "description": "今日感情建议"
+    },
+    "shechen_advice": {
+      "bsonType": "string",
+      "description": "12时辰吉凶分析及建议，JSON字符串"
+    },
+    "created_at": {
+      "bsonType": "timestamp",
+      "description": "创建时间"
+    },
+    "updated_at": {
+      "bsonType": "timestamp",
+      "description": "更新时间"
+    }
+  }
+}

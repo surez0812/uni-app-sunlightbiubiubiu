@@ -19,6 +19,14 @@
 			"style": {
 				"navigationBarTitleText": "我的"
 			}
+		},
+		{
+			"path": "pages/elemental-pouch/detail",
+			"style": {
+				"navigationBarTitleText": "元气锦囊",
+				"navigationBarBackgroundColor": "#ff9a9e",
+				"navigationBarTextStyle": "white"
+			}
 		}
 	],
 	"tabBar": {

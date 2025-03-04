@@ -512,6 +512,9 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 //
 //
 //
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -932,6 +935,171 @@ var _default = {
         }, _callee5, null, [[0, 9]]);
       }))();
     },
+    getElementalPouch: function getElementalPouch() {
+      var _this6 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6() {
+        var _this6$weatherInfo, _this6$weatherInfo$no, _this6$weatherInfo2, birthParts, birthTimeParts, yearGanzhi, monthGanzhi, dayGanzhi, hourGanzhi, baziData, requestData, res, _res$result$data, _res$result$data2, id, _res$result, errorMsg;
+        return _regenerator.default.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                if (!(!_this6.userInfo.birthday || !_this6.userInfo.birthTime)) {
+                  _context6.next = 3;
+                  break;
+                }
+                uni.showToast({
+                  title: '请先设置生日信息',
+                  icon: 'none'
+                });
+                return _context6.abrupt("return");
+              case 3:
+                _context6.prev = 3;
+                uni.showLoading({
+                  title: '获取元气锦囊中...'
+                });
+
+                // 输出 todayAdvice 对象结构
+                console.log('todayAdvice 对象:', JSON.stringify(_this6.todayAdvice));
+
+                // 解析生日信息
+                birthParts = _this6.userInfo.birthday.split('-');
+                birthTimeParts = _this6.userInfo.birthTime.split(':'); // 获取八字信息
+                yearGanzhi = '甲子';
+                monthGanzhi = '乙丑';
+                dayGanzhi = '丙寅';
+                hourGanzhi = '丁卯'; // 如果有八字信息，则使用
+                try {
+                  if (_this6.todayAdvice && _this6.todayAdvice.bazi && _this6.todayAdvice.bazi.birth) {
+                    baziData = _this6.todayAdvice.bazi.birth; // 年柱
+                    if (baziData.year && baziData.year.text) {
+                      if (typeof baziData.year.text === 'string') {
+                        yearGanzhi = baziData.year.text;
+                      } else if (Array.isArray(baziData.year.text)) {
+                        yearGanzhi = baziData.year.text.join('');
+                      } else if (baziData.year.text[0] && baziData.year.text[1]) {
+                        yearGanzhi = baziData.year.text[0] + baziData.year.text[1];
+                      }
+                    }
+
+                    // 月柱
+                    if (baziData.month && baziData.month.text) {
+                      if (typeof baziData.month.text === 'string') {
+                        monthGanzhi = baziData.month.text;
+                      } else if (Array.isArray(baziData.month.text)) {
+                        monthGanzhi = baziData.month.text.join('');
+                      } else if (baziData.month.text[0] && baziData.month.text[1]) {
+                        monthGanzhi = baziData.month.text[0] + baziData.month.text[1];
+                      }
+                    }
+
+                    // 日柱
+                    if (baziData.day && baziData.day.text) {
+                      if (typeof baziData.day.text === 'string') {
+                        dayGanzhi = baziData.day.text;
+                      } else if (Array.isArray(baziData.day.text)) {
+                        dayGanzhi = baziData.day.text.join('');
+                      } else if (baziData.day.text[0] && baziData.day.text[1]) {
+                        dayGanzhi = baziData.day.text[0] + baziData.day.text[1];
+                      }
+                    }
+
+                    // 时柱
+                    if (baziData.hour && baziData.hour.text) {
+                      if (typeof baziData.hour.text === 'string') {
+                        hourGanzhi = baziData.hour.text;
+                      } else if (Array.isArray(baziData.hour.text)) {
+                        hourGanzhi = baziData.hour.text.join('');
+                      } else if (baziData.hour.text[0] && baziData.hour.text[1]) {
+                        hourGanzhi = baziData.hour.text[0] + baziData.hour.text[1];
+                      }
+                    }
+                  } else {
+                    console.log('没有八字信息，使用默认干支');
+                    yearGanzhi = '甲子';
+                    monthGanzhi = '乙丑';
+                    dayGanzhi = '丙寅';
+                    hourGanzhi = '丁卯';
+                  }
+                } catch (error) {
+                  console.error('处理八字信息时出错:', error);
+                  yearGanzhi = '甲子';
+                  monthGanzhi = '乙丑';
+                  dayGanzhi = '丙寅';
+                  hourGanzhi = '丁卯';
+                }
+                console.log('准备调用元气锦囊云函数，用户生日:', _this6.userInfo.birthday);
+                console.log('八字信息:', {
+                  yearGanzhi: yearGanzhi,
+                  monthGanzhi: monthGanzhi,
+                  dayGanzhi: dayGanzhi,
+                  hourGanzhi: hourGanzhi
+                });
+
+                // 准备请求数据
+                requestData = {
+                  birth_date: _this6.userInfo.birthday,
+                  gender: _this6.userInfo.gender || '男',
+                  year_ganzhi: yearGanzhi,
+                  month_ganzhi: monthGanzhi,
+                  day_ganzhi: dayGanzhi,
+                  hour_ganzhi: hourGanzhi,
+                  weather: ((_this6$weatherInfo = _this6.weatherInfo) === null || _this6$weatherInfo === void 0 ? void 0 : (_this6$weatherInfo$no = _this6$weatherInfo.now) === null || _this6$weatherInfo$no === void 0 ? void 0 : _this6$weatherInfo$no.text) || '晴',
+                  location: ((_this6$weatherInfo2 = _this6.weatherInfo) === null || _this6$weatherInfo2 === void 0 ? void 0 : _this6$weatherInfo2.city) || '北京'
+                }; // 如果有用户ID，则添加到请求中
+                if (_this6.userInfo._id) {
+                  requestData.user_id = _this6.userInfo._id;
+                }
+                console.log('元气锦囊请求数据:', JSON.stringify(requestData));
+                _context6.next = 20;
+                return uniCloud.callFunction({
+                  name: 'getElementalPouch',
+                  data: {
+                    data: requestData
+                  }
+                });
+              case 20:
+                res = _context6.sent;
+                console.log('元气锦囊响应结果:', JSON.stringify(res));
+                uni.hideLoading();
+                if (res.result && (res.result.status === 'success' || res.result.code === 0)) {
+                  // 导航到元气锦囊详情页面
+                  id = ((_res$result$data = res.result.data) === null || _res$result$data === void 0 ? void 0 : _res$result$data.id) || ((_res$result$data2 = res.result.data) === null || _res$result$data2 === void 0 ? void 0 : _res$result$data2._id);
+                  if (id) {
+                    uni.navigateTo({
+                      url: '/pages/elemental-pouch/detail?id=' + id
+                    });
+                  } else {
+                    uni.showToast({
+                      title: '获取元气锦囊成功，但缺少ID',
+                      icon: 'none'
+                    });
+                  }
+                } else {
+                  errorMsg = ((_res$result = res.result) === null || _res$result === void 0 ? void 0 : _res$result.message) || '获取元气锦囊失败';
+                  uni.showToast({
+                    title: errorMsg,
+                    icon: 'none'
+                  });
+                }
+                _context6.next = 31;
+                break;
+              case 26:
+                _context6.prev = 26;
+                _context6.t0 = _context6["catch"](3);
+                uni.hideLoading();
+                console.error('获取元气锦囊失败:', _context6.t0);
+                uni.showToast({
+                  title: '获取元气锦囊失败，请重试',
+                  icon: 'none'
+                });
+              case 31:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[3, 26]]);
+      }))();
+    },
     getWuxingClass: function getWuxingClass(wuxing) {
       console.log('获取五行类名，输入:', wuxing, '类型:', (0, _typeof2.default)(wuxing));
       if (!wuxing) {
@@ -988,9 +1156,21 @@ var _default = {
       }
     },
     goToEditBirthday: function goToEditBirthday() {
-      uni.navigateTo({
-        url: '/pages/birthday/birthday'
-      });
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee7() {
+        return _regenerator.default.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                uni.navigateTo({
+                  url: '/pages/birthday/birthday'
+                });
+              case 1:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
     }
   }
 };

@@ -132,7 +132,10 @@
       
       <view class="advice-container" v-if="userInfo.birthday">
         <view class="advice-card luck-card">
-          <view class="section-title">今日心情</view>
+          <view class="section-title-row">
+            <text class="section-title">今日心情</text>
+            <button class="elemental-pouch-btn" @tap="getElementalPouch">元气锦囊</button>
+          </view>
           <text class="content">{{todayAdvice.luck || '加载中...'}}</text>
         </view>
         
@@ -507,6 +510,159 @@ export default {
       }
     },
     
+    async getElementalPouch() {
+      if (!this.userInfo.birthday || !this.userInfo.birthTime) {
+        uni.showToast({
+          title: '请先设置生日信息',
+          icon: 'none'
+        })
+        return
+      }
+      
+      try {
+        uni.showLoading({
+          title: '获取元气锦囊中...'
+        })
+        
+        // 输出 todayAdvice 对象结构
+        console.log('todayAdvice 对象:', JSON.stringify(this.todayAdvice))
+        
+        // 解析生日信息
+        const birthParts = this.userInfo.birthday.split('-')
+        const birthTimeParts = this.userInfo.birthTime.split(':')
+        
+        // 获取八字信息
+        let yearGanzhi = '甲子'
+        let monthGanzhi = '乙丑'
+        let dayGanzhi = '丙寅'
+        let hourGanzhi = '丁卯'
+        
+        // 如果有八字信息，则使用
+        try {
+          if (this.todayAdvice && this.todayAdvice.bazi && this.todayAdvice.bazi.birth) {
+            const baziData = this.todayAdvice.bazi.birth;
+            
+            // 年柱
+            if (baziData.year && baziData.year.text) {
+              if (typeof baziData.year.text === 'string') {
+                yearGanzhi = baziData.year.text;
+              } else if (Array.isArray(baziData.year.text)) {
+                yearGanzhi = baziData.year.text.join('');
+              } else if (baziData.year.text[0] && baziData.year.text[1]) {
+                yearGanzhi = baziData.year.text[0] + baziData.year.text[1];
+              }
+            }
+            
+            // 月柱
+            if (baziData.month && baziData.month.text) {
+              if (typeof baziData.month.text === 'string') {
+                monthGanzhi = baziData.month.text;
+              } else if (Array.isArray(baziData.month.text)) {
+                monthGanzhi = baziData.month.text.join('');
+              } else if (baziData.month.text[0] && baziData.month.text[1]) {
+                monthGanzhi = baziData.month.text[0] + baziData.month.text[1];
+              }
+            }
+            
+            // 日柱
+            if (baziData.day && baziData.day.text) {
+              if (typeof baziData.day.text === 'string') {
+                dayGanzhi = baziData.day.text;
+              } else if (Array.isArray(baziData.day.text)) {
+                dayGanzhi = baziData.day.text.join('');
+              } else if (baziData.day.text[0] && baziData.day.text[1]) {
+                dayGanzhi = baziData.day.text[0] + baziData.day.text[1];
+              }
+            }
+            
+            // 时柱
+            if (baziData.hour && baziData.hour.text) {
+              if (typeof baziData.hour.text === 'string') {
+                hourGanzhi = baziData.hour.text;
+              } else if (Array.isArray(baziData.hour.text)) {
+                hourGanzhi = baziData.hour.text.join('');
+              } else if (baziData.hour.text[0] && baziData.hour.text[1]) {
+                hourGanzhi = baziData.hour.text[0] + baziData.hour.text[1];
+              }
+            }
+          } else {
+            console.log('没有八字信息，使用默认干支');
+            yearGanzhi = '甲子';
+            monthGanzhi = '乙丑';
+            dayGanzhi = '丙寅';
+            hourGanzhi = '丁卯';
+          }
+        } catch (error) {
+          console.error('处理八字信息时出错:', error);
+          yearGanzhi = '甲子';
+          monthGanzhi = '乙丑';
+          dayGanzhi = '丙寅';
+          hourGanzhi = '丁卯';
+        }
+        
+        console.log('准备调用元气锦囊云函数，用户生日:', this.userInfo.birthday)
+        console.log('八字信息:', { yearGanzhi, monthGanzhi, dayGanzhi, hourGanzhi })
+        
+        // 准备请求数据
+        const requestData = {
+          birth_date: this.userInfo.birthday,
+          gender: this.userInfo.gender || '男',
+          year_ganzhi: yearGanzhi,
+          month_ganzhi: monthGanzhi,
+          day_ganzhi: dayGanzhi,
+          hour_ganzhi: hourGanzhi,
+          weather: this.weatherInfo?.now?.text || '晴',
+          location: this.weatherInfo?.city || '北京'
+        }
+        
+        // 如果有用户ID，则添加到请求中
+        if (this.userInfo._id) {
+          requestData.user_id = this.userInfo._id
+        }
+        
+        console.log('元气锦囊请求数据:', JSON.stringify(requestData))
+        
+        const res = await uniCloud.callFunction({
+          name: 'getElementalPouch',
+          data: {
+            data: requestData
+          }
+        })
+        
+        console.log('元气锦囊响应结果:', JSON.stringify(res))
+        
+        uni.hideLoading()
+        
+        if (res.result && (res.result.status === 'success' || res.result.code === 0)) {
+          // 导航到元气锦囊详情页面
+          const id = res.result.data?.id || res.result.data?._id
+          if (id) {
+            uni.navigateTo({
+              url: '/pages/elemental-pouch/detail?id=' + id
+            })
+          } else {
+            uni.showToast({
+              title: '获取元气锦囊成功，但缺少ID',
+              icon: 'none'
+            })
+          }
+        } else {
+          const errorMsg = res.result?.message || '获取元气锦囊失败'
+          uni.showToast({
+            title: errorMsg,
+            icon: 'none'
+          })
+        }
+      } catch (error) {
+        uni.hideLoading()
+        console.error('获取元气锦囊失败:', error)
+        uni.showToast({
+          title: '获取元气锦囊失败，请重试',
+          icon: 'none'
+        })
+      }
+    },
+    
     getWuxingClass(wuxing) {
       console.log('获取五行类名，输入:', wuxing, '类型:', typeof wuxing);
       
@@ -563,7 +719,7 @@ export default {
       }
     },
     
-    goToEditBirthday() {
+    async goToEditBirthday() {
       uni.navigateTo({
         url: '/pages/birthday/birthday'
       })
@@ -733,11 +889,28 @@ export default {
     margin-bottom: $spacing-lg;
     box-shadow: $shadow-md;
     
-    .section-title {
-      font-size: $font-lg;
-      color: $color-text-primary;
-      font-weight: $weight-semibold;
-      margin-bottom: $spacing-lg;
+    .section-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-md;
+      
+      .section-title {
+        font-size: $font-lg;
+        font-weight: $weight-semibold;
+        color: $color-text-primary;
+      }
+      
+      .elemental-pouch-btn {
+        font-size: $font-sm;
+        padding: 4rpx 20rpx;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+        color: #fff;
+        border-radius: 30rpx;
+        border: none;
+        line-height: 1.6;
+        box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+      }
     }
     
     .content {

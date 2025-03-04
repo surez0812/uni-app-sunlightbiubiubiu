@@ -1,0 +1,30 @@
+# 依赖目录
+node_modules/
+.unpackage/
+dist/
+.hbuilderx/
+
+# 系统文件
+.DS_Store
+*.swp
+*.swo
+
+# 环境文件
+.env
+.env.local
+
+# 日志文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 图标生成产物
+/sunlightuniapp/static/tabbar/*.png
+!/sunlightuniapp/static/tabbar/README.md
+
+# UniCloud调试文件
+cloudfunctions-aliyun/
+cloudfunctions-tcb/
+
+# 配置文件
+sunlightuniapp/uniCloud-aliyun/cloudfunctions/getElementalPouch/config.json 

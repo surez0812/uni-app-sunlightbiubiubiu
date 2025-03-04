@@ -10023,7 +10023,7 @@ var b = "development" === "development",
   k = "true" === undefined || !0 === undefined,
   P = T([]),
   C = "h5" === E ? "web" : "app-plus" === E || "app-harmony" === E ? "app" : E,
-  A = T({"address":["127.0.0.1","192.168.3.140","10.4.156.22"],"servePort":7001,"debugPort":9000,"initialLaunchType":"remote","skipFiles":["<node_internals>/**","/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"]}),
+  A = T({"address":["127.0.0.1","10.4.2.98","169.254.95.133"],"servePort":7001,"debugPort":9000,"initialLaunchType":"remote","skipFiles":["<node_internals>/**","/Applications/HBuilderX.app/Contents/HBuilderX/plugins/unicloud/**/*.js"]}),
   O = T([{"provider":"aliyun","spaceName":"sure-hello-test","spaceId":"mp-6ff62194-5475-4b3f-922e-ed572ead7f13","clientSecret":"YXH9AIHmRylSsTL2VPDcEQ==","endpoint":"https://api.next.bspapp.com"}]) || [],
   x = true;
 var N = "";
@@ -18430,6 +18430,13 @@ var _default = {
     "path": "pages/my/my",
     "style": {
       "navigationBarTitleText": "我的"
+    }
+  }, {
+    "path": "pages/elemental-pouch/detail",
+    "style": {
+      "navigationBarTitleText": "元气锦囊",
+      "navigationBarBackgroundColor": "#ff9a9e",
+      "navigationBarTextStyle": "white"
     }
   }],
   "tabBar": {

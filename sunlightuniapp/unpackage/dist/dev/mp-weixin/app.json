@@ -2,7 +2,8 @@
   "pages": [
     "pages/welcome/welcome",
     "pages/birthday/birthday",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/elemental-pouch/detail"
   ],
   "subPackages": [],
   "window": {
